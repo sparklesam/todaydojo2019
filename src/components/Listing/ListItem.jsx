@@ -35,7 +35,7 @@ export default class ListItem extends Component {
     const { node, categories } = this.props;
     return (
       <Item>
-        <Img sizes={node.data.feature.localFile.childImageSharp.sizes} />
+        <img src={node.data.feature.url} />
         <Headline>
           {categories && <Categories categories={categories} />}
         </Headline>

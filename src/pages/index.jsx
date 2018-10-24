@@ -168,6 +168,7 @@ export const pageQuery = graphql`
           uid
           data {
             feature {
+              url
               localFile {
                 id
                 childImageSharp {
@@ -176,7 +177,6 @@ export const pageQuery = graphql`
                    srcSet
                    srcWebp
                    srcSetWebp
-                   base64
                    aspectRatio
                    sizes
                  }

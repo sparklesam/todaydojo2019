@@ -19,9 +19,8 @@ const Content = styled.div`
   grid-gap: 20px;
 `
 
-const Category = styled.a`
+const Category = styled.div`
   display: block;
-  
   margin-bottom: 30px;
   a {
     font-family: 'Helvetica', 'Arial', sans-serif;

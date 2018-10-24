@@ -150,6 +150,17 @@ export const pageQuery = graphql`
             url {
               url
             }
+          body {
+              ... on PrismicPostBodyText {
+                slice_type
+                id
+                primary {
+                  text {
+                    html
+                  }
+                }
+              }
+            }
             feature {
               localFile {
                 id

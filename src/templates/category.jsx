@@ -104,6 +104,17 @@ query CategoryPage($category: String!) {
              url {
                url
              }
+            body {
+              ... on PrismicPostBodyText {
+                slice_type
+                id
+                primary {
+                  text {
+                    html
+                  }
+                }
+              }
+            }
             date(formatString: "DD.MM.YYYY")
             categories {
               category {

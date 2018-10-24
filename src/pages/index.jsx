@@ -191,6 +191,30 @@ export const pageQuery = graphql`
                   }
                 }
               }
+              ... on PrismicPostBodyCodeBlock {
+                slice_type
+                id
+                primary {
+                  code_block {
+                    html
+                  }
+                }
+              }
+              ... on PrismicPostBodyImage {
+                slice_type
+                id
+                primary {
+                  image {
+                    localFile {
+                      childImageSharp {
+                        fluid(maxWidth: 1200, quality: 90) {
+                          ...GatsbyImageSharpFluid_withWebp
+                        }
+                      }
+                    }
+                  }
+                }
+              }
             }
             date(formatString: "DD.MM.YYYY")
             categories {

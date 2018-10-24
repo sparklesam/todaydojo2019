@@ -3,12 +3,31 @@ import PropTypes from 'prop-types';
 import styled from 'react-emotion';
 import { graphql } from 'gatsby';
 import { Layout, Listing, Wrapper, Title } from 'components';
+import Categories from '../components/Listing/Categories';
+import kebabCase from 'lodash/kebabCase';
+import Link from 'gatsby-link';
 
 const Hero = styled.header`
   background-color: ${props => props.theme.colors.greyLight};
   display: flex;
   align-items: center;
 `;
+
+const Content = styled.div`
+  display: grid;
+  grid-template-columns: 20% 80%;
+  grid-gap: 20px;
+`
+
+const Category = styled.a`
+  display: block;
+  
+  margin-bottom: 30px;
+  a {
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    font-style: normal;
+  }
+`
 
 const HeroInner = styled(Wrapper)`
   padding-top: 13rem;
@@ -74,27 +93,10 @@ const Social = styled.ul`
   }
 `;
 
-const ProjectListing = styled.ul`
-  list-style-type: none;
-  margin-left: 0;
-  margin-top: 4rem;
-  li {
-    margin-bottom: 1.45rem;
-    a {
-      font-size: 2.369rem;
-      font-style: normal;
-      color: ${props => props.theme.colors.black};
-      @media (max-width: ${props => props.theme.breakpoints.s}) {
-        font-size: 1.777rem;
-      }
-    }
-  }
-`;
-
 class Index extends Component {
   render() {
     const {
-      data: { homepage, social, posts, projects },
+      data: { homepage, social, posts, category },
     } = this.props;
     return (
       <Layout>
@@ -111,10 +113,18 @@ class Index extends Component {
             </Social>
           </HeroInner>
         </Hero>
+        <Content>
+        <Wrapper>
+          <Title style={{ marginTop: '4rem' }}>Categories</Title>
+          {category.edges.map(c =>(
+            <Category><Link to={`/categories/${kebabCase(c.node.data.name)}`}>{c.node.data.name}</Link></Category>
+          ))}
+        </Wrapper>
         <Wrapper style={{ paddingTop: '2rem', paddingBottom: '2rem' }}>
           <Title style={{ marginTop: '4rem' }}>Recent posts</Title>
           <Listing posts={posts.edges} />
         </Wrapper>
+        </Content>
       </Layout>
     );
   }
@@ -129,100 +139,72 @@ Index.propTypes = {
 };
 
 export const pageQuery = graphql`
-  query IndexQuery {
-    homepage: prismicHomepage {
-      data {
-        title {
-          text
-        }
-        content {
-          html
-        }
+query IndexQuery {
+  homepage: prismicHomepage {
+    data {
+      title {
+        text
+      }
+      content {
+        html
       }
     }
-    social: allPrismicHeroLinksBodyLinkItem {
-      edges {
-        node {
-          primary {
-            label {
-              text
-            }
-            link {
-              url
-            }
+  }
+  social: allPrismicHeroLinksBodyLinkItem {
+    edges {
+      node {
+        primary {
+          label {
+            text
+          }
+          link {
+            url
           }
         }
       }
     }
-    posts: allPrismicPost(sort: { fields: [data___date], order: DESC }) {
-      edges {
-        node {
-          uid
-          data {
-            feature {
-              url
-              localFile {
-                id
-                childImageSharp {
-                 sizes(maxWidth: 1280) {
-                   src
-                   srcSet
-                   srcWebp
-                   srcSetWebp
-                   aspectRatio
-                   sizes
-                 }
-               }
-              }
-             }
-            title {
-              text
-            }
-            url {
-              url
-            }
-            body {
-              ... on PrismicPostBodyText {
-                slice_type
-                id
-                primary {
-                  text {
-                    html
-                  }
-                }
-              }
-              ... on PrismicPostBodyCodeBlock {
-                slice_type
-                id
-                primary {
-                  code_block {
-                    html
-                  }
-                }
-              }
-              ... on PrismicPostBodyImage {
-                slice_type
-                id
-                primary {
-                  image {
-                    localFile {
-                      childImageSharp {
-                        fluid(maxWidth: 1200, quality: 90) {
-                          ...GatsbyImageSharpFluid_withWebp
-                        }
-                      }
-                    }
-                  }
+  }
+  category: allPrismicCategory(sort:{ fields: [data___name], order: ASC}) {
+    edges {
+      node {
+        id
+        data {
+          name
+        }
+      }
+    }
+  }
+  posts: allPrismicPost(sort: { fields: [data___date], order: DESC }) {
+    edges {
+      node {
+        uid
+        data {
+          feature {
+            url
+           }
+          title {
+            text
+          }
+          url {
+            url
+          }
+          body {
+            ... on PrismicPostBodyText {
+              slice_type
+              id
+              primary {
+                text {
+                  html
                 }
               }
             }
-            date(formatString: "DD.MM.YYYY")
-            categories {
-              category {
-                document {
-                  data {
-                    name
-                  }
+          }
+          date(formatString: "DD.MM.YYYY")
+          categories {
+            category {
+              document {
+                data {
+                  name
                 }
               }
             }
@@ -231,4 +213,19 @@ export const pageQuery = graphql`
       }
     }
   }
+  projects: allPrismicProjectsBodyLinkItem {
+    edges {
+      node {
+        primary {
+          label {
+            text
+          }
+          link {
+            url
+          }
+        }
+      }
+    }
+  }
+}
 `;

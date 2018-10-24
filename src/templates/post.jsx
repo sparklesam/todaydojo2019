@@ -77,6 +77,7 @@ export const pageQuery = graphql`
           url
         }
         feature {
+          url
           localFile {
             id
             childImageSharp {

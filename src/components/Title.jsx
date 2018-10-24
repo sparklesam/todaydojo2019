@@ -1,7 +1,7 @@
 import styled from 'react-emotion';
 
 const Title = styled.p`
-  font-style: italic;
+  font-family: 'Helvetica', 'Arial', sans-serif;
   font-size: 1.4444rem;
   position: relative;
   &:before {

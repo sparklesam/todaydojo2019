@@ -167,10 +167,25 @@ export const pageQuery = graphql`
         node {
           uid
           data {
+            feature {
+              localFile {
+                id
+                childImageSharp {
+                 sizes(maxWidth: 1280) {
+                   src
+                   srcSet
+                   srcWebp
+                   srcSetWebp
+                   base64
+                   aspectRatio
+                   sizes
+                 }
+               }
+              }
+             }
             title {
               text
             }
-            link 
             url {
               url
             }

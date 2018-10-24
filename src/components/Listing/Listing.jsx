@@ -8,6 +8,9 @@ const List = styled.ul`
   margin-bottom: 4rem;
   list-style-type: none;
   margin-left: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
 `;
 
 export default class Listing extends Component {

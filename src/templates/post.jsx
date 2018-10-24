@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
 import styled from 'react-emotion';
+import Img from 'gatsby-image';
 import { Layout, Listing, Wrapper, SliceZone, Title, SEO, Header } from 'components';
 import Categories from '../components/Listing/Categories';
 import website from '../../config/website';
@@ -39,6 +40,7 @@ const Post = ({ data: { prismicPost, posts }, location }) => {
             {data.date} — {categories && <Categories categories={categories} />}
           </Headline>
           <h1>{data.title.text}</h1>
+          
           <a href={data.url.url}>Visit Now</a>
         </Wrapper>
       </Hero>
@@ -74,6 +76,22 @@ export const pageQuery = graphql`
         url {
           url
         }
+        feature {
+          localFile {
+            id
+            childImageSharp {
+             sizes(maxWidth: 1280) {
+               src
+               srcSet
+               srcWebp
+               srcSetWebp
+               base64
+               aspectRatio
+               sizes
+             }
+           }
+          }
+         }
         date(formatString: "DD.MM.YYYY")
         categories {
           category {
@@ -129,6 +147,25 @@ export const pageQuery = graphql`
             title {
               text
             }
+            url {
+              url
+            }
+            feature {
+              localFile {
+                id
+                childImageSharp {
+                 sizes(maxWidth: 1280) {
+                   src
+                   srcSet
+                   srcWebp
+                   srcSetWebp
+                   base64
+                   aspectRatio
+                   sizes
+                 }
+               }
+              }
+             }
             date(formatString: "DD.MM.YYYY")
             categories {
               category {

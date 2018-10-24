@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'react-emotion';
+import Img from 'gatsby-image';
 import { Link } from 'gatsby';
 import { Categories } from 'components/Listing';
 
@@ -34,11 +35,12 @@ export default class ListItem extends Component {
     const { node, categories } = this.props;
     return (
       <Item>
+        <Img sizes={node.data.feature.localFile.childImageSharp.sizes} />
         <Headline>
-          {node.data.date} — {categories && <Categories categories={categories} />}
+          {categories && <Categories categories={categories} />}
         </Headline>
         <StyledLink to={node.uid}>{node.data.title.text}</StyledLink>
-        <a href={node.data.url}>Visit Now 2</a>
+        <a href={node.data.url.url}>Visit Now 2</a>
       </Item>
     );
   }

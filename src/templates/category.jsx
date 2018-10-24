@@ -67,11 +67,16 @@ Category.propTypes = {
 
 
 export const pageQuery = graphql`
-  query CategoryPage {
-    posts: allPrismicPost(
-      sort: { fields: [data___date], order: DESC }
-    ) {
-      totalCount
+query CategoryPage($category: String!) {
+  posts: allPrismicPost(
+    sort: { fields: [data___date], order: DESC }
+    filter: {
+      data: {
+        categories: { elemMatch: { category: { document: { elemMatch: { data: { name: { eq: $category } } } } } } }
+      }
+    }
+  ) {
+    totalCount
       edges {
         node {
           uid
@@ -79,6 +84,25 @@ export const pageQuery = graphql`
             title {
               text
             }
+            feature {
+              localFile {
+                id
+                childImageSharp {
+                 sizes(maxWidth: 1280) {
+                   src
+                   srcSet
+                   srcWebp
+                   srcSetWebp
+                   base64
+                   aspectRatio
+                   sizes
+                 }
+               }
+              }
+             }
+             url {
+               url
+             }
             date(formatString: "DD.MM.YYYY")
             categories {
               category {

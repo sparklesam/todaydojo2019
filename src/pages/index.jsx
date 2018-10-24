@@ -114,14 +114,6 @@ class Index extends Component {
         <Wrapper style={{ paddingTop: '2rem', paddingBottom: '2rem' }}>
           <Title style={{ marginTop: '4rem' }}>Recent posts</Title>
           <Listing posts={posts.edges} />
-          <Title style={{ marginTop: '8rem' }}>Recent projects</Title>
-          <ProjectListing>
-            {projects.edges.map(project => (
-              <li key={project.node.primary.label.text}>
-                <a href={project.node.primary.link.url}>{project.node.primary.label.text}</a>
-              </li>
-            ))}
-          </ProjectListing>
         </Wrapper>
       </Layout>
     );
@@ -189,6 +181,17 @@ export const pageQuery = graphql`
             url {
               url
             }
+            body {
+              ... on PrismicPostBodyText {
+                slice_type
+                id
+                primary {
+                  text {
+                    html
+                  }
+                }
+              }
+            }
             date(formatString: "DD.MM.YYYY")
             categories {
               category {
@@ -198,20 +201,6 @@ export const pageQuery = graphql`
                   }
                 }
               }
-            }
-          }
-        }
-      }
-    }
-    projects: allPrismicProjectsBodyLinkItem {
-      edges {
-        node {
-          primary {
-            label {
-              text
-            }
-            link {
-              url
             }
           }
         }

@@ -85,6 +85,7 @@ query CategoryPage($category: String!) {
               text
             }
             feature {
+              url
               localFile {
                 id
                 childImageSharp {

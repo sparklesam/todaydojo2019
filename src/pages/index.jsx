@@ -103,13 +103,6 @@ class Index extends Component {
           <HeroInner>
             <h1>{homepage.data.title.text}</h1>
             <HeroText dangerouslySetInnerHTML={{ __html: homepage.data.content.html }} />
-            <Social>
-              {social.edges.map(s => (
-                <li key={s.node.primary.label.text}>
-                  <a href={s.node.primary.link.url}>{s.node.primary.label.text}</a>
-                </li>
-              ))}
-            </Social>
           </HeroInner>
         </Hero>
         <Content>

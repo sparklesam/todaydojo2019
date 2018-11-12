@@ -25,10 +25,9 @@ const Headline = styled.p`
   /*font-family: 'Source Sans Pro', -apple-system, 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial',
     sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';*/
   color: ${props => props.theme.colors.grey};
-  margin-bottom: 0;
+  margin-bottom: 5px;
   font-weight: 500;
-  font-family: 'Helvetica';
-  line-height: normal;
+  line-height: 1.5;
   font-size: 12px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -41,12 +40,16 @@ const Headline = styled.p`
   }
 `;
 
+/* Disabled Link to Individual Post 
 const StyledLink = styled(Link)`
-  font-family: 'Helvetica';
+*/
+
+const StyledLink = /*(Link)*/ styled.div`
   font-size: 32px;
   line-height: 42px;
   color: #000;
-  font-weight: 900;
+  font-weight: 500;
+  cursor: auto; 
   /*color: ${props => props.theme.colors.black};*/
   font-style: normal;
   @media (max-width: ${props => props.theme.breakpoints.s}) {
@@ -55,8 +58,6 @@ const StyledLink = styled(Link)`
 `;
 
 const BrowseButton = styled.a`
-  font-family: 'Source Sans Pro', -apple-system, 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial',
-    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   display: block;
   color: #fbb03b;
   text-transform: uppercase;
@@ -79,7 +80,7 @@ export default class ListItem extends Component {
         <Headline>
           {categories && <Categories categories={categories} />}
         </Headline>
-        <StyledLink to={node.uid}>{node.data.title.text}</StyledLink>
+        <StyledLink /*to={node.uid}*/>{node.data.title.text}</StyledLink>
         <SliceZone allSlices={node.data.body} />
         <BrowseButton target="_blank" href={node.data.url.url}>Browse Now</BrowseButton>
         </Content>

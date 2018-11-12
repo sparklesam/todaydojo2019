@@ -15,6 +15,8 @@ const Hero = styled.header`
 `;
 
 const Content = styled.div`
+  max-width: 1280px;
+  margin: 0 auto;
   display: grid;
   grid-template-columns: 20% 80%;
   grid-gap: 20px;
@@ -42,7 +44,6 @@ const CateogryItem = styled.div`
   display: block;
   margin-bottom: 30px;
   a {
-    font-family: 'Helvetica', 'Arial', sans-serif;
     font-style: normal;
   }
 `
@@ -52,6 +53,7 @@ const HeroInner = styled(Wrapper)`
   padding-bottom: 13rem;
   h1 {
     margin-bottom: 2rem;
+    font-weight: 500;
   }
   @media (max-width: ${props => props.theme.breakpoints.l}) {
     padding-top: 10rem;
@@ -84,8 +86,6 @@ const Social = styled.ul`
   display: flex;
   flex-wrap: wrap;
   margin-left: 0;
-  font-family: 'Source Sans Pro', -apple-system, 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial',
-    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   li {
     display: inline;
     &:not(:first-child) {
@@ -125,7 +125,7 @@ class Index extends Component {
           </HeroInner>
         </Hero>
         <Content>
-        <Wrapper style={{marginLeft: '0', marginRight: '0'}}>
+        <Wrapper style={{ paddingTop: '2rem', marginLeft: '0', marginRight: '0'}}>
           <Title style={{ marginTop: '4rem' }}>Categories</Title>
           <Category>{category.edges.map(c =>(
             <CateogryItem><Link to={`/categories/${kebabCase(c.node.data.name)}`}>{c.node.data.name}</Link></CateogryItem>

@@ -15,6 +15,12 @@ injectGlobal`
   h1, h2, h3, h4, h5, h6 {
     color: ${theme.colors.black};
   }
+  h6 {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 400;
+  }
+
   html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -56,10 +62,10 @@ injectGlobal`
       font-size: 1rem !important;
     }
     h5 {
-      font-size: 0.75rem !important;
+      font-size: 0.85rem !important;
     }
     h6 {
-      font-size: 0.563rem !important;
+      font-size: 0.7rem !important;
     }
   }
 `;

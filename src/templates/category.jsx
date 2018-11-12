@@ -4,9 +4,14 @@ import { graphql } from 'gatsby';
 import styled from 'react-emotion';
 import { Layout, Listing, Wrapper, Title, SEO, Header } from 'components';
 import website from '../../config/website';
+import Backgroundshape from '../../static/bg.svg';
 
 const Hero = styled.section`
-  background-color: ${props => props.theme.colors.primary};
+  background: linear-gradient(90deg, #0E38A6 0%, #0181DE 100%);
+  width: 100%;
+  height: 60vh;
+  position: relative;
+  overflow: hidden;
   padding-top: 1rem;
   padding-bottom: 4rem;
   h1 {
@@ -14,9 +19,15 @@ const Hero = styled.section`
   }
 `;
 
+const Background = styled.img`
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  mix-blend-mode: multiply;
+  z-index: 0; 
+`
+
 const Headline = styled.p`
-  font-family: 'Source Sans Pro', -apple-system, 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial',
-    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   color: ${props => props.theme.colors.greyBlue};
   font-size: 1.25rem;
   a {
@@ -35,7 +46,8 @@ const Category = ({
   <Layout>
     <SEO title={`${category} | ${website._title}`} pathname={location.pathname} />
     <Hero>
-      <Wrapper>
+    <Background src={Backgroundshape} />
+    <Wrapper>
         <Header invert />
         <Headline>Category</Headline>
         <h1>{category}</h1>

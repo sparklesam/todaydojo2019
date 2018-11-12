@@ -7,12 +7,78 @@ import { theme, reset } from 'styles';
 import Categories from '../components/Listing/Categories';
 import kebabCase from 'lodash/kebabCase';
 import Link from 'gatsby-link';
+import Backgroundshape from '../../static/bg.svg';
+
+const Topbar = styled.div`
+background: #2F3D61;
+height: 40px;
+display: flex;
+align-items: center;
+h6 {
+  color: white;
+  opacity: 0.8;
+  padding-top: 24px;
+}
+`
 
 const Hero = styled.header`
-  background-color: ${props => props.theme.colors.greyLight};
+  background: linear-gradient(90deg, #0E38A6 0%, #0181DE 100%);
+  width: 100%;
+  height: 60vh;
+  position: relative;
+  overflow: hidden;
+`;
+
+const HeroWrapper = styled.div`
   display: flex;
   align-items: center;
+`
+
+const HeroInner = styled(Wrapper)`
+  z-index: 1;
+  padding-top: 7rem;
+  padding-bottom: 7rem;
+  text-align: center;
+  h1 {
+    color: white;
+    margin-bottom: 2rem;
+    font-weight: 400;
+  }
+  @media (max-width: ${props => props.theme.breakpoints.l}) {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+  @media (max-width: ${props => props.theme.breakpoints.m}) {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+  @media (max-width: ${props => props.theme.breakpoints.s}) {
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+  }
 `;
+
+const HeroText = styled.div`
+  color: white;
+  font-size: 1.7rem;
+  line-height: 1.4;
+  margin-bottom: 2rem;
+  @media (max-width: ${props => props.theme.breakpoints.m}) {
+    font-size: 1.4rem;
+  }
+  @media (max-width: ${props => props.theme.breakpoints.s}) {
+    font-size: 1.25rem;
+  }
+`;
+
+const Background = styled.img`
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  mix-blend-mode: multiply;
+  z-index: 0;
+  
+`
 
 const Content = styled.div`
   max-width: 1280px;
@@ -48,38 +114,7 @@ const CateogryItem = styled.div`
   }
 `
 
-const HeroInner = styled(Wrapper)`
-  padding-top: 13rem;
-  padding-bottom: 13rem;
-  h1 {
-    margin-bottom: 2rem;
-    font-weight: 500;
-  }
-  @media (max-width: ${props => props.theme.breakpoints.l}) {
-    padding-top: 10rem;
-    padding-bottom: 10rem;
-  }
-  @media (max-width: ${props => props.theme.breakpoints.m}) {
-    padding-top: 8rem;
-    padding-bottom: 8rem;
-  }
-  @media (max-width: ${props => props.theme.breakpoints.s}) {
-    padding-top: 6rem;
-    padding-bottom: 6rem;
-  }
-`;
 
-const HeroText = styled.div`
-  font-size: 1.7rem;
-  line-height: 1.4;
-  margin-bottom: 2rem;
-  @media (max-width: ${props => props.theme.breakpoints.m}) {
-    font-size: 1.4rem;
-  }
-  @media (max-width: ${props => props.theme.breakpoints.s}) {
-    font-size: 1.25rem;
-  }
-`;
 
 const Social = styled.ul`
   list-style-type: none;
@@ -118,11 +153,15 @@ class Index extends Component {
     } = this.props;
     return (
       <Layout>
+        <Topbar><Wrapper><h6>New! Welcome to Dojo Today</h6></Wrapper></Topbar>
         <Hero>
+        <Background src={Backgroundshape} />
+        <HeroWrapper>
           <HeroInner>
             <h1>{homepage.data.title.text}</h1>
             <HeroText dangerouslySetInnerHTML={{ __html: homepage.data.content.html }} />
           </HeroInner>
+          </HeroWrapper> 
         </Hero>
         <Content>
         <Wrapper style={{ paddingTop: '2rem', marginLeft: '0', marginRight: '0'}}>

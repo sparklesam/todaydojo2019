@@ -1,6 +1,7 @@
 import styled from 'react-emotion';
 
 const Wrapper = styled.div`
+  z-index: 2;
   max-width: ${props => props.theme.maxWidth};
   margin: 0 auto;
   padding: 0 2rem;

@@ -4,6 +4,7 @@ import { Link } from 'gatsby';
 import styled from 'react-emotion';
 
 const StyledHeader = styled.header`
+
   padding-bottom: 2rem;
   a {
     color: ${props => (props.invert ? props.theme.colors.greyLight : props.theme.colors.greyDark)};
@@ -19,7 +20,7 @@ class Header extends Component {
     const { invert } = this.props;
     return (
       <StyledHeader invert={invert}>
-        <Link to="/">Frontend Developer</Link>
+        <Link to="/">Dojo Today</Link>
       </StyledHeader>
     );
   }

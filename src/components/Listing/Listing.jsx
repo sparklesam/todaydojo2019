@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'react-emotion';
 import { ListItem } from 'components/Listing';
+import { theme, reset } from 'styles';
 
 const List = styled.ul`
   margin-top: 4rem;
@@ -11,6 +12,11 @@ const List = styled.ul`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 20px;
+
+  @media (max-width: ${theme.breakpoints.m}) {
+  grid-template-columns: 1fr;
+  grid-gap: 0px;
+  }
 `;
 
 export default class Listing extends Component {

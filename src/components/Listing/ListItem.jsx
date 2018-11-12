@@ -74,7 +74,7 @@ export default class ListItem extends Component {
     const { node, categories } = this.props;
     return (
       <Item>
-        <img src={node.data.feature.url} />
+        <img src={node.data.feature.url} paddingTop="50%" objectFit="cover" width="100%"/>
         <Content>
         <Headline>
           {categories && <Categories categories={categories} />}

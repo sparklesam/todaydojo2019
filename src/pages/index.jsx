@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'react-emotion';
 import { graphql } from 'gatsby';
 import { Layout, Listing, Wrapper, Title } from 'components';
+import { theme, reset } from 'styles';
 import Categories from '../components/Listing/Categories';
 import kebabCase from 'lodash/kebabCase';
 import Link from 'gatsby-link';
@@ -17,9 +18,27 @@ const Content = styled.div`
   display: grid;
   grid-template-columns: 20% 80%;
   grid-gap: 20px;
+
+  @media (max-width: ${theme.breakpoints.m}) {
+  grid-template-columns: 1fr;
+  grid-gap: 0px;
+  }
 `
 
 const Category = styled.div`
+width: 100%;
+  @media (max-width: ${theme.breakpoints.m}) {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 20px;
+  }
+
+  @media (max-width: ${theme.breakpoints.m}) {
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+  }
+`
+const CateogryItem = styled.div`
   display: block;
   margin-bottom: 30px;
   a {
@@ -106,11 +125,11 @@ class Index extends Component {
           </HeroInner>
         </Hero>
         <Content>
-        <Wrapper>
+        <Wrapper style={{marginLeft: '0', marginRight: '0'}}>
           <Title style={{ marginTop: '4rem' }}>Categories</Title>
-          {category.edges.map(c =>(
-            <Category><Link to={`/categories/${kebabCase(c.node.data.name)}`}>{c.node.data.name}</Link></Category>
-          ))}
+          <Category>{category.edges.map(c =>(
+            <CateogryItem><Link to={`/categories/${kebabCase(c.node.data.name)}`}>{c.node.data.name}</Link></CateogryItem>
+          ))}</Category>
         </Wrapper>
         <Wrapper style={{ paddingTop: '2rem', paddingBottom: '2rem' }}>
           <Title style={{ marginTop: '4rem' }}>Recent posts</Title>

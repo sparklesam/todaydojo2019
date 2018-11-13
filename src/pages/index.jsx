@@ -19,6 +19,9 @@ h6 {
   opacity: 0.8;
   padding-top: 24px;
 }
+
+span {
+}
 `
 
 const Hero = styled.header`
@@ -32,6 +35,7 @@ const Hero = styled.header`
 const HeroWrapper = styled.div`
   display: flex;
   align-items: center;
+  height: 100%;
 `
 
 const HeroInner = styled(Wrapper)`
@@ -155,7 +159,7 @@ class Index extends Component {
     } = this.props;
     return (
       <Layout>
-        <Topbar><Wrapper><h6>New! Welcome to Dojo Today</h6></Wrapper></Topbar>
+        <Topbar><Wrapper><h6>Welcome to the revamped Dojo Today. <span> Read what happened </span></h6></Wrapper></Topbar>
         <Hero>
         <Background src={Backgroundshape} />
         <HeroWrapper>

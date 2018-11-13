@@ -53,7 +53,7 @@ const HeroInner = styled(Wrapper)`
     padding-bottom: 6rem;
   }
   @media (max-width: ${props => props.theme.breakpoints.s}) {
-    padding-top: 7rem;
+    padding-top: 2rem;
     padding-bottom: 7rem;
   }
 `;
@@ -111,6 +111,8 @@ const CateogryItem = styled.div`
   margin-bottom: 30px;
   a {
     font-style: normal;
+    color: #3660CE;
+    font-family: 'Roboto', 'Arial';
   }
 `
 

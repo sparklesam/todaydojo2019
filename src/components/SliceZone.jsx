@@ -9,10 +9,9 @@ const Content = styled.div`
   padding: 1rem 0;
   p,
   li {
-    font-family: 'Helvetica', 'Arial';
     font-size: 16px;
     line-height: 26px;
-    color: #818181;
+    color: #727682;
     letter-spacing: -0.003em;
     --baseline-multiplier: 0.179;
     --x-height-multiplier: 0.35;

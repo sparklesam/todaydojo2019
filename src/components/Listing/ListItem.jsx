@@ -8,12 +8,12 @@ import { SliceZone } from 'components'
 
 const Item = styled.li`
   margin-bottom: 1.45rem;
-  background: #F7F7F7;
+  background: #FBFBFB;
   transition: box-shadow .2s ease-in-out;
-  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
+  
 
   &:hover {
-    box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
   }
 `;
 
@@ -24,7 +24,8 @@ const Content = styled.div`
 const Headline = styled.p`
   /*font-family: 'Source Sans Pro', -apple-system, 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial',
     sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';*/
-  color: ${props => props.theme.colors.grey};
+  /* color: ${props => props.theme.colors.grey};*/
+  color: #979DAD;
   margin-bottom: 5px;
   font-weight: 500;
   line-height: 1.5;
@@ -47,8 +48,8 @@ const StyledLink = styled(Link)`
 const StyledLink = /*(Link)*/ styled.div`
   font-size: 32px;
   line-height: 42px;
-  color: #000;
-  font-weight: 500;
+  color: #2F3D61;
+  font-weight: 700;
   cursor: auto; 
   /*color: ${props => props.theme.colors.black};*/
   font-style: normal;
@@ -57,16 +58,20 @@ const StyledLink = /*(Link)*/ styled.div`
   }
 `;
 
-const BrowseButton = styled.a`
+const BrowseButton = styled.button`
+  font-family: 'Roboto', 'Arial';
   display: block;
-  color: #fbb03b;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  font-size: 12px;
-  font-style: normal;
-  transition: color .2s ease-in-out;
-  ${Item}:hover & {
-    color: #FFC062;
+  color: #1FDCBA;
+  background-color: #E7FDF9;
+  border: none;
+  border-radius: 25px;
+  padding: 8px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all .2s ease-in-out;
+  &:hover  {
+    background-color: #D5F4EE;
+    color: #13CBAA;
   }
 `;
 

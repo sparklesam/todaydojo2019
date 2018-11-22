@@ -9,7 +9,7 @@ import Backgroundshape from '../../static/bg.svg';
 const Hero = styled.section`
   background: linear-gradient(90deg, #0E38A6 0%, #0181DE 100%);
   width: 100%;
-  height: 60vh;
+  height: 200px;
   position: relative;
   overflow: hidden;
   padding-top: 1rem;
@@ -24,17 +24,27 @@ const Background = styled.img`
   bottom: 0;
   right: 0;
   mix-blend-mode: multiply;
-  z-index: 0; 
+  z-index: 1; 
+  width: 100%;
 `
 
-const Headline = styled.p`
+const Subtitle= styled.p`
   color: ${props => props.theme.colors.greyBlue};
   font-size: 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 12px;
+  
   a {
     font-style: normal;
     font-weight: normal;
+    
   }
 `;
+
+const Headline = styled.h1`
+  display: block;
+`
 
 const Category = ({
   pageContext: { category },
@@ -46,12 +56,13 @@ const Category = ({
   <Layout>
     <SEO title={`${category} | ${website._title}`} pathname={location.pathname} />
     <Hero>
-    <Background src={Backgroundshape} />
-    <Wrapper>
+    
+    <Wrapper style={{ zIndex: '2', position: 'relative'}}>
         <Header invert />
-        <Headline>Category</Headline>
-        <h1>{category}</h1>
-      </Wrapper>
+        <Subtitle>Category</Subtitle>
+        <Headline>{category}</Headline>
+    </Wrapper>
+    <Background src={Backgroundshape} />
     </Hero>
     <Wrapper>
       <Title style={{ marginTop: '4rem' }}>

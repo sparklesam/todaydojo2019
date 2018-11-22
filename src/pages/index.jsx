@@ -81,6 +81,7 @@ const Background = styled.img`
   right: 0;
   mix-blend-mode: multiply;
   z-index: 0;
+  width: 100%;
   
 `
 

@@ -61,7 +61,10 @@ const StyledLink = /*(Link)*/ styled.div`
 const BrowseButton = styled.button`
   font-family: 'Roboto', 'Arial';
   display: block;
-  color: #1FDCBA;
+  & a {
+    color: #1FDCBA;
+    font-style: normal;
+  }
   background-color: #E7FDF9;
   border: none;
   border-radius: 25px;
@@ -71,7 +74,11 @@ const BrowseButton = styled.button`
   transition: all .2s ease-in-out;
   &:hover  {
     background-color: #D5F4EE;
+  }
+  
+  & a:hover {
     color: #13CBAA;
+    text-decoration: none;
   }
 `;
 
@@ -87,7 +94,7 @@ export default class ListItem extends Component {
         </Headline>
         <StyledLink /*to={node.uid}*/>{node.data.title.text}</StyledLink>
         <SliceZone allSlices={node.data.body} />
-        <BrowseButton target="_blank" href={node.data.url.url}>Browse Now</BrowseButton>
+        <BrowseButton><a target="_blank" href={node.data.url.url} >Browse Now</a></BrowseButton>
         </Content>
       </Item>
     );

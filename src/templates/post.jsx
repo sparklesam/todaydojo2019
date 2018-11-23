@@ -3,26 +3,93 @@ import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
 import styled from 'react-emotion';
 import Img from 'gatsby-image';
+import { theme, reset } from 'styles';
 import { Layout, Listing, Wrapper, SliceZone, Title, SEO, Header } from 'components';
 import Categories from '../components/Listing/Categories';
 import website from '../../config/website';
+import Backgroundshape from '../../static/bg.svg';
 
 const Hero = styled.section`
-  background-color: ${props => props.theme.colors.greyLight};
+  background: linear-gradient(90deg, #0E38A6 0%, #0181DE 100%);
+  width: 100%;
+  height: auto;
+  position: relative;
+  overflow: hidden;
   padding-top: 1rem;
   padding-bottom: 4rem;
+
+  h1 {
+    color: ${props => props.theme.colors.bg};
+  }
 `;
 
+const Background = styled.img`
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  mix-blend-mode: multiply;
+  z-index: 1; 
+  width: 100%;
+`
+
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 16px;
+  @media (max-width: ${theme.breakpoints.m}) {
+    grid-template-columns: 1fr;
+  }
+
+`
+
+const ImageWrapper = styled.div`
+  margin: 20px 0;
+`
 const Headline = styled.p`
   font-family: 'Source Sans Pro', -apple-system, 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial',
     sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-  color: ${props => props.theme.colors.grey};
+  color: ${props => props.theme.colors.greyBlue};
   font-size: 1.25rem;
   a {
     font-style: normal;
     font-weight: normal;
+    color: ${props => props.theme.colors.greyBlue};
+  }
+  h6 {
+    color: ${props => props.theme.colors.greyBlue};
   }
 `;
+
+const BrowseButton = styled.button`
+  font-family: 'Roboto', 'Arial';
+  display: block;
+  & a {
+    color: #1FDCBA;
+    font-style: normal;
+  }
+  background-color: #E7FDF9;
+  border: none;
+  border-radius: 25px;
+  padding: 8px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all .2s ease-in-out;
+  &:hover  {
+    background-color: #D5F4EE;
+  }
+  
+  & a:hover {
+    color: #13CBAA;
+    text-decoration: none;
+  }
+`;
+
+const Description = styled.div`
+  padding: 2vh 0 0 0;
+  h6 {
+    color: ${props => props.theme.colors.greyBlue};
+  }
+`
 
 const Post = ({ data: { prismicPost, posts }, location }) => {
   const { data } = prismicPost;
@@ -32,20 +99,31 @@ const Post = ({ data: { prismicPost, posts }, location }) => {
   }
   return (
     <Layout>
-      <SEO title={`${data.title.text} | ${website._title}`} pathname={location.pathname} article />
+      <SEO title={`${data.title.text} | ${website._title}`} pathname={location.pathname} article banner={`${data.feature.localFile.childImageSharp.sizes.src}`}/>
       <Hero>
-        <Wrapper>
-          <Header />
+        <Wrapper style={{ zIndex: '2', position: 'relative'}}>
+          <Header invert />
           <Headline>
-            {data.date} — {categories && <Categories categories={categories} />}
+            <h6> {categories && <Categories categories={categories} />}</h6>
           </Headline>
+          
           <h1>{data.title.text}</h1>
           
-          <a href={data.url.url}>Visit Now</a>
+          <BrowseButton><a target="_blank" href={data.url.url} >Browse Now</a></BrowseButton>
         </Wrapper>
+        <Background src={Backgroundshape} />
+        
       </Hero>
       <Wrapper>
-        <SliceZone allSlices={data.body} />
+        <Grid>
+        <div>
+          <Description><h6>Description</h6></Description>
+          <SliceZone allSlices={data.body} />
+        </div>
+        <ImageWrapper>
+          <Img sizes={data.feature.localFile.childImageSharp.sizes} ></Img>
+        </ImageWrapper>
+        </Grid>
         <Title style={{ marginTop: '4rem' }}>Recent posts</Title>
         <Listing posts={posts.edges} />
       </Wrapper>
@@ -86,7 +164,6 @@ export const pageQuery = graphql`
                srcSet
                srcWebp
                srcSetWebp
-               base64
                aspectRatio
                sizes
              }
@@ -171,7 +248,6 @@ export const pageQuery = graphql`
                    srcSet
                    srcWebp
                    srcSetWebp
-                   base64
                    aspectRatio
                    sizes
                  }

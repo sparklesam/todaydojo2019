@@ -238,6 +238,22 @@ query IndexQuery {
         data {
           feature {
             url
+            localFile {
+              childImageSharp {
+                sizes(maxWidth: 1280) {
+                  aspectRatio
+                  src
+                  srcSet
+                  srcWebp
+                  srcSetWebp
+                  sizes
+                  originalImg
+                  originalName
+                  presentationWidth
+                  presentationHeight
+                }
+              }
+            }
            }
           title {
             text

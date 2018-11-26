@@ -17,7 +17,7 @@
     "emotion": "^9.2.12",
     "emotion-server": "^9.2.12",
     "emotion-theming": "^9.2.9",
-    "gatsby": "^2.0.45",
+    "gatsby": "^2.0.55",
     "gatsby-image": "^2.0.15",
     "gatsby-plugin-emotion": "^2.0.5",
     "gatsby-plugin-lodash": "^3.0.1",

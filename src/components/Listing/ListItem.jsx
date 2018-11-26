@@ -61,10 +61,8 @@ const StyledLink = /*(Link)*/ styled.div`
 const BrowseButton = styled.button`
   font-family: 'Roboto', 'Arial';
   display: block;
-  & a {
-    color: #1FDCBA;
-    font-style: normal;
-  }
+  color: #1FDCBA;
+  font-style: normal;
   background-color: #E7FDF9;
   border: none;
   border-radius: 25px;
@@ -74,9 +72,7 @@ const BrowseButton = styled.button`
   transition: all .2s ease-in-out;
   &:hover  {
     background-color: #D5F4EE;
-  }
-  
-  & a:hover {
+    cursor: pointer;
     color: #13CBAA;
     text-decoration: none;
   }
@@ -87,14 +83,14 @@ export default class ListItem extends Component {
     const { node, categories } = this.props;
     return (
       <Item>
-        <img src={node.data.feature.url} paddingTop="50%" objectFit="cover" width="100%"/>
+        <Img sizes={node.data.feature.localFile.childImageSharp.sizes} />
         <Content>
         <Headline>
           {categories && <Categories categories={categories} />}
         </Headline>
         <StyledLink /*to={node.uid}*/>{node.data.title.text}</StyledLink>
         <SliceZone allSlices={node.data.body} />
-        <BrowseButton><a target="_blank" href={node.data.url.url} >Browse Now</a></BrowseButton>
+        <a target="_blank" href={node.data.url.url}><BrowseButton>Browse Now</BrowseButton></a>
         </Content>
       </Item>
     );

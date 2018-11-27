@@ -8,6 +8,10 @@ import Categories from '../components/Listing/Categories';
 import kebabCase from 'lodash/kebabCase';
 import Link from 'gatsby-link';
 import Backgroundshape from '../../static/bg.svg';
+import BookmarkIcon from '../../static/HeroContact.svg'
+import HomeIcon from '../../static/HeroProfile.svg'
+import WorkIcon from '../../static/HeroProject.svg'
+import BlogIcon from '../../static/HeroBlog.svg'
 
 const Topbar = styled.div`
 background: #2F3D61;
@@ -153,6 +157,50 @@ const Social = styled.ul`
   }
 `;
 
+const NavBar = styled.div`
+  max-width: 1440px;
+  margin: 1em auto;
+  display: flex;
+  flex-direction: row;
+  margin-right: 2em;
+
+  a {
+    opacity: 0.5;
+
+    &:hover {
+      opacity: 1;
+      text-decoration: none;
+      transition: opacity 300ms ease-in-out ;
+    }
+  }
+`
+
+const Button = styled.div`
+  width: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  margin-right: 2em;
+
+`
+
+const NavLink = styled.h5`
+  height: auto;
+  margin: 0;
+  text-transform: none;
+  font-family: 'IBM Plex Sans','Helvetica Neue','Segoe UI','Helvetica','Arial',sans-serif;
+  font-weight: 500;
+  letter-spacing: 0;
+  font-style: normal;
+  font-size: 1rem;
+`
+
+const Icon = styled.img`
+  width: 25px;
+  margin-right: 1em;
+`
+
 class Index extends Component {
   render() {
     const {
@@ -161,6 +209,13 @@ class Index extends Component {
     return (
       <Layout>
         <Topbar><Wrapper><h6>Welcome to the revamped Dojo Today. <span> Read what happened </span></h6></Wrapper></Topbar>
+        <NavBar>
+        <a href="http://desktopofsamuel.com/"><Button><Icon src={HomeIcon} /><NavLink style={{ color: "#95973B" }}>Home</NavLink></Button></a>
+        <a href="http://desktopofsamuel.com/work"><Button><Icon src={WorkIcon} /><NavLink style={{ color: "#49CB74" }}>Work</NavLink></Button></a>
+        <a href="http://desktopofsamuel.com/blog"><Button><Icon src={BlogIcon} /><NavLink style={{ color: "#FE8170" }}>Blog</NavLink></Button></a>
+        <Link exact to="/" style={{ opacity: "1"}}><Button><Icon src={BookmarkIcon} /><NavLink style={{ color: "#3284DC" }}>Bookmark</NavLink></Button></Link>
+
+        </NavBar>
         <Hero>
         <Background src={Backgroundshape} />
         <HeroWrapper>

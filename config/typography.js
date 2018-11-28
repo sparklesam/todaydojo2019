@@ -4,10 +4,11 @@ import Typography from 'typography';
 // The scaleRatio will be overwritten for smaller breakpoints in src/components/Layout
 
 const typography = new Typography({
-  title: 'Dojo Today',
+  title: 'Pins | Desktop of Samuel',
   baseFontSize: '18px',
   baseLineHeight: 1.45,
   headerFontFamily: [
+    'IBM Plex Sans',
     'Roboto',
     '-apple-system',
     'BlinkMacSystemFont',
@@ -21,6 +22,7 @@ const typography = new Typography({
     'Segoe UI Symbol',
   ],
   bodyFontFamily: [
+    'IBM Plex Sans',
     'Roboto',
     '-apple-system',
     'BlinkMacSystemFont',

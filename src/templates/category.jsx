@@ -7,25 +7,30 @@ import website from '../../config/website';
 import Backgroundshape from '../../static/bg.svg';
 
 const Hero = styled.section`
-  background: linear-gradient(90deg, #0E38A6 0%, #0181DE 100%);
+  background: /*linear-gradient(90deg, #0E38A6 0%, #0181DE 100%)*/ white;
   width: 100%;
-  height: 200px;
+  height: auto;
   position: relative;
-  overflow: hidden;
   padding-top: 1rem;
   padding-bottom: 4rem;
   h1 {
-    color: ${props => props.theme.colors.bg};
+    color: ${props => props.theme.colors.grey};
+    
   }
 `;
 
+const Pagetitle = styled.div`
+padding-top: 4em;
+`
+
 const Background = styled.img`
-  position: absolute;
+/*  position: absolute;
   bottom: 0;
   right: 0;
   mix-blend-mode: multiply;
   z-index: 1; 
   width: 100%;
+  */
 `
 
 const Subtitle= styled.p`
@@ -44,6 +49,7 @@ const Subtitle= styled.p`
 
 const Headline = styled.h1`
   display: block;
+  
 `
 
 const Category = ({
@@ -58,11 +64,13 @@ const Category = ({
     <Hero>
     
     <Wrapper style={{ zIndex: '2', position: 'relative'}}>
-        <Header invert />
+        <Header/>
+        <Pagetitle>
         <Subtitle>Category</Subtitle>
         <Headline>{category}</Headline>
+        </Pagetitle>
     </Wrapper>
-    <Background src={Backgroundshape} />
+    {/*<Background src={Backgroundshape} />*/}
     </Hero>
     <Wrapper>
       <Title style={{ marginTop: '4rem' }}>

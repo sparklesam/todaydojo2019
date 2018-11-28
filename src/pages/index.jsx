@@ -8,7 +8,7 @@ import Categories from '../components/Listing/Categories';
 import kebabCase from 'lodash/kebabCase';
 import Link from 'gatsby-link';
 import Backgroundshape from '../../static/bg.svg';
-import BookmarkIcon from '../../static/HeroContact.svg'
+import BookmarkIcon from '../../static/HeroPin.svg'
 import HomeIcon from '../../static/HeroProfile.svg'
 import WorkIcon from '../../static/HeroProject.svg'
 import BlogIcon from '../../static/HeroBlog.svg'
@@ -29,9 +29,9 @@ span {
 `
 
 const Hero = styled.header`
-  background: linear-gradient(90deg, #0E38A6 0%, #0181DE 100%);
+  background: /*linear-gradient(90deg, #0E38A6 0%, #0181DE 100%)*/ white;
   width: 100%;
-  height: 60vh;
+  height: 40vh;
   position: relative;
   overflow: hidden;
 `;
@@ -43,14 +43,12 @@ const HeroWrapper = styled.div`
 `
 
 const HeroInner = styled(Wrapper)`
-  z-index: 1;
-  padding-top: 7rem;
-  padding-bottom: 7rem;
-  text-align: center;
+  padding: 5em 0em;
+  text-align: left;
   h1 {
-    color: white;
+    color: ${props => props.theme.colors.grey};
     margin-bottom: 2rem;
-    font-weight: 400;
+    font-weight: 500;
   }
   @media (max-width: ${props => props.theme.breakpoints.l}) {
     padding-top: 6rem;
@@ -67,7 +65,7 @@ const HeroInner = styled(Wrapper)`
 `;
 
 const HeroText = styled.div`
-  color: white;
+  color: ${props => props.theme.colors.greyBlue};
   font-size: 1.7rem;
   line-height: 1.4;
   margin-bottom: 2rem;
@@ -80,12 +78,12 @@ const HeroText = styled.div`
 `;
 
 const Background = styled.img`
-  position: absolute;
+/*  position: absolute;
   bottom: 0;
   right: 0;
   mix-blend-mode: multiply;
   z-index: 0;
-  width: 100%;
+  width: 100%; */
   
 `
 
@@ -213,11 +211,10 @@ class Index extends Component {
         <a href="http://desktopofsamuel.com/"><Button><Icon src={HomeIcon} /><NavLink style={{ color: "#95973B" }}>Home</NavLink></Button></a>
         <a href="http://desktopofsamuel.com/work"><Button><Icon src={WorkIcon} /><NavLink style={{ color: "#49CB74" }}>Work</NavLink></Button></a>
         <a href="http://desktopofsamuel.com/blog"><Button><Icon src={BlogIcon} /><NavLink style={{ color: "#FE8170" }}>Blog</NavLink></Button></a>
-        <Link exact to="/" style={{ opacity: "1"}}><Button><Icon src={BookmarkIcon} /><NavLink style={{ color: "#3284DC" }}>Bookmark</NavLink></Button></Link>
-
+        <Link exact to="/" style={{ opacity: "1"}}><Button><Icon src={BookmarkIcon} /><NavLink style={{ color: "#6469DA" }}>Pins</NavLink></Button></Link>
         </NavBar>
         <Hero>
-        <Background src={Backgroundshape} />
+        {/*<Background src={Backgroundshape} />*/}
         <HeroWrapper>
           <HeroInner>
             <h1>{homepage.data.title.text}</h1>
@@ -225,6 +222,7 @@ class Index extends Component {
           </HeroInner>
           </HeroWrapper> 
         </Hero>
+        <Wrapper>
         <Content>
         <Wrapper style={{ paddingTop: '2rem', marginLeft: '0', marginRight: '0'}}>
           <Title style={{ marginTop: '4rem' }}>Categories</Title>
@@ -237,6 +235,7 @@ class Index extends Component {
           <Listing posts={posts.edges} />
         </Wrapper>
         </Content>
+        </Wrapper>
       </Layout>
     );
   }

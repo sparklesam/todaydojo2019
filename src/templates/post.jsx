@@ -10,7 +10,7 @@ import website from '../../config/website';
 import Backgroundshape from '../../static/bg.svg';
 
 const Hero = styled.section`
-  background: linear-gradient(90deg, #0E38A6 0%, #0181DE 100%);
+  background: /*linear-gradient(90deg, #0E38A6 0%, #0181DE 100%)*/ white;
   width: 100%;
   height: auto;
   position: relative;
@@ -19,17 +19,17 @@ const Hero = styled.section`
   padding-bottom: 4rem;
 
   h1 {
-    color: ${props => props.theme.colors.bg};
+    color: ${props => props.theme.colors.grey};
   }
 `;
 
 const Background = styled.img`
-  position: absolute;
+  /*position: absolute;
   bottom: 0;
   right: 0;
   mix-blend-mode: multiply;
   z-index: 1; 
-  width: 100%;
+  width: 100%;*/
 `
 
 const Grid = styled.div`
@@ -50,6 +50,7 @@ const Headline = styled.p`
     sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   color: ${props => props.theme.colors.greyBlue};
   font-size: 1.25rem;
+  margin-top: 4em;
   a {
     font-style: normal;
     font-weight: normal;
@@ -111,7 +112,7 @@ const Post = ({ data: { prismicPost, posts }, location }) => {
           
           <BrowseButton><a target="_blank" href={data.url.url} >Browse Now</a></BrowseButton>
         </Wrapper>
-        <Background src={Backgroundshape} />
+        {/*<Background src={Backgroundshape} />*/}
         
       </Hero>
       <Wrapper>

@@ -6,13 +6,14 @@ import BookmarkIcon from '../../static/HeroPin.svg'
 import HomeIcon from '../../static/HeroProfile.svg'
 import WorkIcon from '../../static/HeroProject.svg'
 import BlogIcon from '../../static/HeroBlog.svg'
+import PhotoIcon from '../../static/HeroPhotography.svg'
 
 const NavBar = styled.div`
   max-width: 1440px;
   margin: 1em auto;
   display: flex;
   flex-direction: row;
-  margin-right: 2em;
+  margin-right: 20px;
 
   a {
     opacity: 0.5;
@@ -48,7 +49,7 @@ const NavLink = styled.h5`
 
 const Icon = styled.img`
   width: 25px;
-  margin-right: 1em;
+  margin-right: 10px;
 `
 
 const StyledHeader = styled.header`
@@ -70,9 +71,10 @@ class Header extends Component {
       
       <NavBar>
       <a href="http://desktopofsamuel.com/"><Button><Icon src={HomeIcon} /><NavLink style={{ color: "#95973B" }}>Home</NavLink></Button></a>
-      <a href="http://desktopofsamuel.com/work"><Button><Icon src={WorkIcon} /><NavLink style={{ color: "#49CB74" }}>Work</NavLink></Button></a>
-      <a href="http://desktopofsamuel.com/blog"><Button><Icon src={BlogIcon} /><NavLink style={{ color: "#FE8170" }}>Blog</NavLink></Button></a>
-      <Link exact to="/" style={{ opacity: "1"}}><Button><Icon src={BookmarkIcon} /><NavLink style={{ color: "#6469DA" }}>Pins</NavLink></Button></Link>
+        <a href="http://desktopofsamuel.com/work"><Button><Icon src={WorkIcon} /><NavLink style={{ color: "#49CB74" }}>Work</NavLink></Button></a>
+        <a href="http://desktopofsamuel.com/blog"><Button><Icon src={BlogIcon} /><NavLink style={{ color: "#FE8170" }}>Blog</NavLink></Button></a>
+        <a href="http://photo.desktopofsamuel.com"><Button><Icon src={PhotoIcon} /><NavLink style={{ color: "#3284DC" }}>Aperture</NavLink></Button></a>
+        <Link exact to="/" style={{ opacity: "1"}}><Button><Icon src={BookmarkIcon} /><NavLink style={{ color: "#6469DA" }}>Pin</NavLink></Button></Link>
       </NavBar>
     );
   }

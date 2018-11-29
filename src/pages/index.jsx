@@ -2,16 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'react-emotion';
 import { graphql } from 'gatsby';
-import { Layout, Listing, Wrapper, Title } from 'components';
+import { Layout, Listing, Wrapper, Title, Header } from 'components';
 import { theme, reset } from 'styles';
 import Categories from '../components/Listing/Categories';
 import kebabCase from 'lodash/kebabCase';
 import Link from 'gatsby-link';
 import Backgroundshape from '../../static/bg.svg';
-import BookmarkIcon from '../../static/HeroPin.svg'
-import HomeIcon from '../../static/HeroProfile.svg'
-import WorkIcon from '../../static/HeroProject.svg'
-import BlogIcon from '../../static/HeroBlog.svg'
 
 const Topbar = styled.div`
 background: #2F3D61;
@@ -31,9 +27,14 @@ span {
 const Hero = styled.header`
   background: /*linear-gradient(90deg, #0E38A6 0%, #0181DE 100%)*/ white;
   width: 100%;
-  height: 40vh;
   position: relative;
   overflow: hidden;
+  margin-top: 150px;
+  h1 {
+    color: #000000;
+    margin-bottom: 2rem;
+    font-weight: 500;
+  }
 `;
 
 const HeroWrapper = styled.div`
@@ -42,8 +43,7 @@ const HeroWrapper = styled.div`
   height: 100%;
 `
 
-const HeroInner = styled(Wrapper)`
-  padding: 5em 0em;
+const HeroInner = styled.div`
   text-align: left;
   h1 {
     color: ${props => props.theme.colors.grey};
@@ -65,7 +65,7 @@ const HeroInner = styled(Wrapper)`
 `;
 
 const HeroText = styled.div`
-  color: ${props => props.theme.colors.greyBlue};
+  color: #878787 ;
   font-size: 1.7rem;
   line-height: 1.4;
   margin-bottom: 2rem;
@@ -156,11 +156,11 @@ const Social = styled.ul`
 `;
 
 const NavBar = styled.div`
-  max-width: 1440px;
+  
   margin: 1em auto;
   display: flex;
   flex-direction: row;
-  margin-right: 2em;
+  margin-right: 10px;
 
   a {
     opacity: 0.5;
@@ -179,7 +179,7 @@ const Button = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-  margin-right: 2em;
+  margin-right: 20px;
 
 `
 
@@ -206,21 +206,14 @@ class Index extends Component {
     } = this.props;
     return (
       <Layout>
-        <Topbar><Wrapper><h6>Welcome to the revamped Dojo Today. <span> Read what happened </span></h6></Wrapper></Topbar>
-        <NavBar>
-        <a href="http://desktopofsamuel.com/"><Button><Icon src={HomeIcon} /><NavLink style={{ color: "#95973B" }}>Home</NavLink></Button></a>
-        <a href="http://desktopofsamuel.com/work"><Button><Icon src={WorkIcon} /><NavLink style={{ color: "#49CB74" }}>Work</NavLink></Button></a>
-        <a href="http://desktopofsamuel.com/blog"><Button><Icon src={BlogIcon} /><NavLink style={{ color: "#FE8170" }}>Blog</NavLink></Button></a>
-        <Link exact to="/" style={{ opacity: "1"}}><Button><Icon src={BookmarkIcon} /><NavLink style={{ color: "#6469DA" }}>Pins</NavLink></Button></Link>
-        </NavBar>
+       
+        <Wrapper><Header /></Wrapper>
         <Hero>
         {/*<Background src={Backgroundshape} />*/}
-        <HeroWrapper>
-          <HeroInner>
+        <Wrapper>
             <h1>{homepage.data.title.text}</h1>
             <HeroText dangerouslySetInnerHTML={{ __html: homepage.data.content.html }} />
-          </HeroInner>
-          </HeroWrapper> 
+        </Wrapper>
         </Hero>
         <Wrapper>
         <Content>

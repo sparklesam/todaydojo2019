@@ -31,7 +31,7 @@ const Hero = styled.header`
   overflow: hidden;
   margin-top: 150px;
   h1 {
-    color: #2F3D61;
+    color: ${props => props.theme.colors.titlegrey};
     margin-bottom: 2rem;
     font-weight: 500;
   }

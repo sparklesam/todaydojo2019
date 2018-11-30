@@ -8,6 +8,7 @@ const theme = {
     grey: '#595C62',
     greyDark: '#303643',
     greyDarker: '#1c252b',
+    titlegrey: '#2F3D61;'
   },
   maxWidth: '1280px',
   breakpoints: {

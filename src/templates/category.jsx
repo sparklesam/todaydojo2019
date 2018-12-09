@@ -55,12 +55,15 @@ const Headline = styled.h1`
 const Category = ({
   pageContext: { category },
   data: {
+    page: { data },
     posts: { edges, totalCount },
   },
   location,
-}) => (
+  
+})   => (
+  
   <Layout>
-    <SEO title={`${category} | ${website._title}`} pathname={location.pathname} />
+    <SEO title={`${category} | ${website._title}`} pathname={location.pathname} banner={`${data.image.localFile.childImageSharp.sizes.src}`}/>
     <Hero>
     
     <Wrapper style={{ zIndex: '2', position: 'relative'}}>
@@ -99,6 +102,26 @@ Category.propTypes = {
 
 export const pageQuery = graphql`
 query CategoryPage($category: String!) {
+  page: prismicCategory(data:{ name: { eq: $category }}){
+    data {
+      name
+      image {
+        localFile {
+          id
+          childImageSharp {
+           sizes(maxWidth: 1280) {
+             src
+             srcSet
+             srcWebp
+             srcSetWebp
+             aspectRatio
+             sizes
+           }
+         }
+        } 
+      }
+    }
+  } 
   posts: allPrismicPost(
     sort: { fields: [data___date], order: DESC }
     filter: {

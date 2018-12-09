@@ -40,7 +40,7 @@ injectGlobal`
     font-weight: 700;
     font-style: italic;
     &:hover, &:focus {
-      text-decoration: underline;
+      color: ${theme.colors.primaryShade};
     }
   }
   @media (max-width: ${theme.breakpoints.m}) {

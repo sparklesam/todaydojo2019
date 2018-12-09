@@ -118,7 +118,6 @@ const CateogryItem = styled.div`
   margin-bottom: 30px;
   a {
     font-style: normal;
-    color: #3660CE;
     font-family: 'Roboto', 'Arial';
   }
 `

@@ -4,7 +4,7 @@ import { graphql } from 'gatsby';
 import styled from 'react-emotion';
 import { Layout, Listing, Wrapper, Title, SEO, Header } from 'components';
 import website from '../../config/website';
-import Backgroundshape from '../../static/bg.svg';
+import favicon from '../../static/logos/favicon.png';
 
 const Hero = styled.section`
   background: /*linear-gradient(90deg, #0E38A6 0%, #0181DE 100%)*/ white;
@@ -98,7 +98,6 @@ Category.propTypes = {
   }).isRequired,
   location: PropTypes.object.isRequired,
 };
-
 
 export const pageQuery = graphql`
 query CategoryPage($category: String!) {

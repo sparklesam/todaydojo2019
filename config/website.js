@@ -3,7 +3,7 @@ module.exports = {
   _title: 'Pins | Desktop of Samuel', // Navigation and Site Title
   _titleAlt: 'Pins', // Title for JSONLD
   description: 'Pins is a design resources bookmark.',
-  _url: 'https://pins.desktopofsamuel.com', // Domain of your site. No trailing slash!
+  _url: 'https://pin.desktopofsamuel.com', // Domain of your site. No trailing slash!
   siteLanguage: 'en', // Language Tag on <html> element
   logo: '/logos/favicon.png', // Used for SEO
 

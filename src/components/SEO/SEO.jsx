@@ -32,7 +32,7 @@ export default class SEO extends Component {
         }) => {
           const seo = {
             title: title || defaultTitle,
-            description: defaultDescription || desc,
+            description: desc || defaultDescription,
             image: `${siteUrl}${banner || defaultBanner}`,
             url: `${siteUrl}${pathname || '/'}`,
           };

@@ -81,6 +81,7 @@ const BrowseButton = styled.button`
 export default class ListItem extends Component {
   render() {
     const { node, categories } = this.props;
+    
     return (
       <Item>
         <Img sizes={node.data.feature.localFile.childImageSharp.sizes} />

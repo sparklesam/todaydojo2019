@@ -1,8 +1,9 @@
 import styled from 'react-emotion';
 
 const Title = styled.p`
-  font-family: 'Helvetica', 'Arial', sans-serif;
+  color: ${props => props.theme.colors.grey};
   font-size: 1.4444rem;
+  font-weight: 400;
   position: relative;
   &:before {
     content: '';

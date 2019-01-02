@@ -49,7 +49,11 @@ const Subtitle= styled.p`
 
 const Headline = styled.h1`
   display: block;
-  
+`
+
+const Description = styled.p`
+  color: ${props => props.theme.colors.grey};
+  font-size: 1rem;
 `
 
 const Category = ({
@@ -63,7 +67,7 @@ const Category = ({
 })   => (
   
   <Layout>
-    <SEO title={`${category} | ${website._title}`} pathname={location.pathname} banner={`${data.image.localFile.childImageSharp.sizes.src}`}/>
+    <SEO title={`${category} | ${website._title}`} pathname={location.pathname} banner={`${data.image.localFile.childImageSharp.sizes.src}`} desc={`${data.description}`}/>
     <Hero>
     
     <Wrapper style={{ zIndex: '2', position: 'relative'}}>
@@ -71,6 +75,7 @@ const Category = ({
         <Pagetitle>
         <Subtitle>Category</Subtitle>
         <Headline>{category}</Headline>
+        <Description>{data.description}</Description>
         </Pagetitle>
     </Wrapper>
     {/*<Background src={Backgroundshape} />*/}
@@ -104,6 +109,7 @@ query CategoryPage($category: String!) {
   page: prismicCategory(data:{ name: { eq: $category }}){
     data {
       name
+      description
       image {
         localFile {
           id

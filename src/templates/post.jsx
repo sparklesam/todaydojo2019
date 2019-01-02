@@ -100,7 +100,7 @@ const Post = ({ data: { prismicPost, posts }, location }) => {
   }
   return (
     <Layout>
-      <SEO title={`${data.title.text} | ${website._title}`} pathname={location.pathname} article banner={`${data.feature.localFile.childImageSharp.sizes.src}`}/>
+      <SEO title={`${data.title.text} | ${website._title}`} pathname={location.pathname} article banner={`${data.feature.localFile.childImageSharp.sizes.src}`} />
       <Hero>
         <Wrapper style={{ zIndex: '2', position: 'relative'}}>
           <Header invert />

@@ -328,6 +328,16 @@ query IndexQuery {
               }
             }
           }
+          types {
+          	document {
+              data {
+              	name 
+                icon {
+                  url
+                }
+              }
+            }
+            }
         }
       }
     }

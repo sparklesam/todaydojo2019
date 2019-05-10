@@ -1,4 +1,5 @@
 import Listing from './Listing';
+import Listingv2 from './Listingv2';
 import SEO from './SEO';
 import Footer from './Footer';
 import Header from './Header';
@@ -7,4 +8,4 @@ import Title from './Title';
 import Layout from './Layout';
 import Wrapper from './Wrapper';
 
-export { Footer, Layout, Listing, SEO, Wrapper, SliceZone, Title, Header };
+export { Footer, Layout, Listing, Listingv2, SEO, Wrapper, SliceZone, Title, Header };

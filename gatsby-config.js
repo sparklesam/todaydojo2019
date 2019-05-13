@@ -150,5 +150,87 @@ module.exports = {
         exclude: ["/preview/**", "/do-not-track/me/too/"],
       },
     },
+    {
+      resolve: "gatsby-plugin-feed",
+      options: {
+        setup(ref) {
+          const ret = ref.query.site.siteMetadata;
+          ret.allPrismicPost = ref.query.allPrismicPost;
+          ret.generator = "GatsbyJS Material Starter";
+          return ret;
+        },
+        query: `
+        {
+          site {
+            siteMetadata {
+              author
+              siteUrl
+              description
+            }
+          }
+        }
+      `,
+        feeds: [
+          {
+            serialize(ctx) {
+              const { rssMetadata } = ctx.query.site.siteMetadata;
+              return ctx.query.allPrismicPost.edges.map(edge => ({
+                date: edge.node.data.date,
+                title: edge.node.data.title.text,
+              }));
+            },
+            query: `
+            {
+              allPrismicPost(sort: { fields: [data___date], order: DESC }) {
+                edges {
+                  node {
+                    uid
+                    data {
+                      feature {
+                        url
+                        localFile {
+                          childImageSharp {
+                            sizes(maxWidth: 1280) {
+                              aspectRatio
+                              src
+                              srcSet
+                              srcWebp
+                              srcSetWebp
+                              sizes
+                            }
+                          }
+                        }
+                       }
+                      title {
+                        text
+                      }
+                      url {
+                        url
+                      }
+                      body {
+                        ... on PrismicPostBodyText {
+                          slice_type
+                          id
+                          primary {
+                            text {
+                              html
+                              text
+                            }
+                          }
+                        }
+                      }
+                      date(formatString: "DD.MM.YYYY")
+                    }
+                  }
+                }
+              }
+            }
+          `,
+            output: "/rss.xml",
+            title: "Your Site's RSS Feed",
+          }
+        ]
+      },
+    },
   ],
 };

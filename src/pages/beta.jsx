@@ -34,20 +34,19 @@ const HeroText = styled.div`
 class Beta extends Component {
   render() {
     const {
-      data: { homepage, social, posts, category },
+      data: { homepage, social, articles, posts, category },
     } = this.props;
 
     
     return (
       <Layout>
-       
-        <Wrapper><Header /></Wrapper>
         <Hero>
         <Wrapper>
             <h1>{homepage.data.title.text}</h1>
             <HeroText dangerouslySetInnerHTML={{ __html: homepage.data.content.html }} />
         </Wrapper>
         <Wrapper>
+          <Listingv2 posts={articles.edges} />
           <Listingv2 posts={posts.edges} />
         </Wrapper>
         </Hero>
@@ -178,6 +177,76 @@ query BetaQuery {
           link {
             url
           }
+        }
+      }
+    }
+  }
+  articles: allPrismicPost(
+    sort: { fields: [data___date], order: DESC }
+    filter: { data: { types: { document: { elemMatch:{ data: { name: { eq: "Article" }}}}}}}
+    limit: 5
+    ) {
+    edges {
+      node {
+        uid
+        data {
+          feature {
+            url
+            localFile {
+              childImageSharp {
+                sizes(maxWidth: 1280) {
+                  aspectRatio
+                  src
+                  srcSet
+                  srcWebp
+                  srcSetWebp
+                  sizes
+                  originalImg
+                  originalName
+                  presentationWidth
+                  presentationHeight
+                }
+              }
+            }
+           }
+          title {
+            text
+          }
+          url {
+            url
+          }
+          body {
+            ... on PrismicPostBodyText {
+              slice_type
+              id
+              primary {
+                text {
+                  html
+                }
+              }
+            }
+          }
+          date(formatString: "DD.MM.YYYY")
+          categories {
+            category {
+              document {
+                data {
+                  name
+                }
+              }
+            }
+          }
+          types {
+            document {
+              data {
+                name
+                color
+                icon {
+                  url
+                }
+              }
+            }
+            }
         }
       }
     }

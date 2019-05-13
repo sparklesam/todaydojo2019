@@ -6,6 +6,7 @@ import { Link } from 'gatsby';
 import { Categories } from 'components/Listingv2';
 import { SliceZone } from 'components'
 
+
 const Item = styled.li`
   margin-bottom: 1.45rem;
   background: #FBFBFB;
@@ -83,7 +84,8 @@ export default class ListItem extends Component {
     const { node, categories } = this.props;
     
     return (
-      <Item>
+      <a href={node.data.url.url}>      
+        <Item>
         <Img sizes={node.data.feature.localFile.childImageSharp.sizes} />
         <Content>
         <Headline>
@@ -91,12 +93,13 @@ export default class ListItem extends Component {
         </Headline>
         <StyledLink /*to={node.uid}*/>{node.data.title.text}</StyledLink>
         <SliceZone allSlices={node.data.body} />
-        <a target="_blank" href={node.data.url.url}><BrowseButton>Browse Now</BrowseButton></a>
         {node.data.types &&
         <p>{node.data.types.document[0].data.name}</p>
         }
         </Content>
       </Item>
+      </a>
+
     );
   }
 }

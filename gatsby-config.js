@@ -29,6 +29,7 @@ const {
   description,
   themeColor,
   backgroundColor,
+  keyword,
   _title,
   _titleAlt,
   _url,
@@ -53,6 +54,7 @@ module.exports = {
     siteUrl: _url + _pathPrefix, // For gatsby-plugin-sitemap
     pathPrefix: _pathPrefix,
     description,
+    keyword,
     banner: logo,
     twitter,
   },

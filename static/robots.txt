@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-sitemap: https://pin.desktopofsamuel.com/sitemap.xml
+sitemap: https://pins.desktopofsamuel.com/sitemap.xml

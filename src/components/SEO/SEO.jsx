@@ -8,7 +8,7 @@ import { Facebook, Twitter } from 'components/SEO';
 
 export default class SEO extends Component {
   render() {
-    const { title, desc, banner, pathname, article } = this.props;
+    const { title, desc, banner, keyword, pathname, article } = this.props;
     return (
       <StaticQuery
         query={query}
@@ -26,6 +26,7 @@ export default class SEO extends Component {
               pathPrefix,
               defaultDescription,
               defaultBanner,
+              defaultKeyword,
               twitter,
             },
           },
@@ -35,6 +36,7 @@ export default class SEO extends Component {
             description: desc || defaultDescription,
             image: `${siteUrl}${banner || defaultBanner}`,
             url: `${siteUrl}${pathname || '/'}`,
+            keyword: keyword || defaultKeyword,
           };
 
           const realPrefix = pathPrefix === '/' ? '' : pathPrefix;
@@ -94,6 +96,7 @@ export default class SEO extends Component {
                 <html lang={siteLanguage} />
                 <meta name="description" content={seo.description} />
                 <meta name="image" content={seo.image} />
+                <meta name="keywords" content={seo.keyword} />
                 <meta name="apple-mobile-web-app-title" content={shortName} />
                 <meta name="application-name" content={shortName} />
                 <script type="application/ld+json">{JSON.stringify(schemaOrgJSONLD)}</script>
@@ -119,6 +122,7 @@ SEO.propTypes = {
   desc: PropTypes.string,
   banner: PropTypes.string,
   pathname: PropTypes.string,
+  keyword: PropTypes.string,
   article: PropTypes.bool,
 };
 
@@ -127,6 +131,7 @@ SEO.defaultProps = {
   desc: null,
   banner: null,
   pathname: null,
+  keyword: null,
   article: false,
 };
 
@@ -145,6 +150,7 @@ const query = graphql`
         pathPrefix
         defaultDescription: description
         defaultBanner: banner
+        defaultKeyword: keyword
         twitter
       }
     }

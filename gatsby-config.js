@@ -175,8 +175,12 @@ module.exports = {
             serialize(ctx) {
               const { rssMetadata } = ctx.query.site.siteMetadata;
               return ctx.query.allPrismicPost.edges.map(edge => ({
+                categories: edge.node.data.categories.category,
                 date: edge.node.data.date,
                 title: edge.node.data.title.text,
+                author: "Samuel Wong",
+                url: "https://pins.desktopofsamuel.com/" + edge.node.uid,
+                guid: "https://pins.desktopofsamuel.com/" + edge.node.uid,
               }));
             },
             query: `
@@ -208,6 +212,7 @@ module.exports = {
                         url
                       }
                       body {
+                        __typename
                         ... on PrismicPostBodyText {
                           slice_type
                           id
@@ -219,7 +224,7 @@ module.exports = {
                           }
                         }
                       }
-                      date(formatString: "DD.MM.YYYY")
+                      date
                     }
                   }
                 }

@@ -67,7 +67,7 @@ const Category = ({
 })   => (
   
   <Layout>
-    <SEO title={` Best ${category} Design Resources | Curated Design Pins on ${website._title}`} pathname={location.pathname} banner={`${data.image.localFile.childImageSharp.sizes.src}`} desc={`${data.description}`}/>
+    <SEO title={` Best ${category} Design Resources | Curated Design Pins on ${website._title}`} pathname={location.pathname} banner={`${data.image.localFile.childImageSharp.sizes.src}`} desc={`${data.description}`} keyword={`${data.keywords}`}/>
     <Hero>
     
     <Wrapper style={{ zIndex: '2', position: 'relative'}}>
@@ -110,6 +110,7 @@ query CategoryPage($category: String!) {
     data {
       name
       description
+      keywords
       image {
         localFile {
           id

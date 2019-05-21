@@ -175,7 +175,6 @@ module.exports = {
             serialize(ctx) {
               const { rssMetadata } = ctx.query.site.siteMetadata;
               return ctx.query.allPrismicPost.edges.map(edge => ({
-                categories: edge.node.data.categories
                 date: edge.node.data.date,
                 title: edge.node.data.title.text,
                 author: "Samuel Wong",

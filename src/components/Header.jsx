@@ -33,7 +33,6 @@ const Button = styled.div`
   align-items: center;
   justify-content: flex-start;
   margin-right: 2em;
-
 `
 
 const NavLink = styled.h5`

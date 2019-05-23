@@ -133,7 +133,7 @@ module.exports = {
         theme_color: themeColor,
         display: 'standalone',
         icon: favicon,
-      },f
+      },
     },
     // Must be placed at the end
     'gatsby-plugin-offline',

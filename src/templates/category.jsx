@@ -196,6 +196,8 @@ query CategoryPage($category: String!) {
             types {
               document {
                 data {
+                  bgcolor
+                  textcolor
                   name 
                   icon {
                     url

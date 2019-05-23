@@ -46,6 +46,24 @@ const Headline = styled.p`
 const StyledLink = styled(Link)`
 */
 
+const TypePill = styled.div`
+display: inline-block;
+border-radius: 10rem;
+text-align: center;
+justify-items: center;
+padding: 0.2rem 0.8rem;
+font-weight: 700;
+letter-spacing: 0.5px;
+text-transform: uppercase;
+font-size: 0.8rem;
+`
+
+const TypeIcon = styled.img`
+width: 10px;
+margin-right: 0.2rem;
+margin-top: -0.2rem;
+`
+
 const StyledLink = styled.a`
   font-size: 32px;
   line-height: 42px;
@@ -95,15 +113,11 @@ export default class ListItem extends Component {
         <Item>
         <Img sizes={node.data.feature.localFile.childImageSharp.sizes} />
         <Content>
-        
-        <Headline>
-        {node.data.types &&
-        <p>{node.data.types.document[0].data.name}</p>
-        }
-        </Headline>
         <StyledLink href={node.data.url.url} target="blank">{node.data.title.text}</StyledLink>
         <SliceZone allSlices={node.data.body} />
-        
+        {node.data.types &&
+          <TypePill style={{ background: `${node.data.types.document[0].data.bgcolor}`, color: `${node.data.types.document[0].data.textcolor}`}} ><TypeIcon src={node.data.types.document[0].data.icon.url} /> {node.data.types.document[0].data.name}</TypePill>
+        }
         </Content>
       </Item>
       

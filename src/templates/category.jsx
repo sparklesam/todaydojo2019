@@ -7,7 +7,7 @@ import website from '../../config/website';
 import favicon from '../../static/logos/favicon.png';
 
 const Wrap = styled(Wrapper)`
-  max-width: 65vw;
+  max-width: 800px;
   margin: 0 auto;
 
   @media (max-width: ${props => props.theme.breakpoints.s}) {

@@ -37,8 +37,6 @@ injectGlobal`
     color: ${theme.colors.primary};
     transition: all 0.4s ease-in-out;
     text-decoration: none;
-    font-weight: 700;
-    font-style: italic;
     &:hover, &:focus {
       color: ${theme.colors.primaryShade};
     }

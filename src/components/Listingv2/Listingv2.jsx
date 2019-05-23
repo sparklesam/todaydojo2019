@@ -5,12 +5,11 @@ import { ListItem } from 'components/Listingv2';
 import { theme, reset } from 'styles';
 
 const List = styled.ul`
-  margin-top: 4rem;
-  margin-bottom: 4rem;
+  margin: 0 auto;
   list-style-type: none;
   margin-left: 0;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   grid-gap: 20px;
 
   @media (max-width: ${theme.breakpoints.m}) {

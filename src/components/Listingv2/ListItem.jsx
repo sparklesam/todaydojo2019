@@ -46,16 +46,23 @@ const Headline = styled.p`
 const StyledLink = styled(Link)`
 */
 
-const StyledLink = /*(Link)*/ styled.div`
+const StyledLink = styled.a`
   font-size: 32px;
   line-height: 42px;
   color: #2F3D61;
   font-weight: 700;
-  cursor: auto; 
+  cursor: pointer; 
   /*color: ${props => props.theme.colors.black};*/
   font-style: normal;
+  transition: background-size .4s ease;
+  background: linear-gradient(to bottom, transparent 62%, #ffd644 0) left center/0% 75% no-repeat;
+
   @media (max-width: ${props => props.theme.breakpoints.s}) {
-    font-size: 1.777rem;
+    font-size: 1.777rem;  
+  }
+
+  &:hover {
+    background-size: 100% 100%;
   }
 `;
 
@@ -84,22 +91,22 @@ export default class ListItem extends Component {
     const { node, categories } = this.props;
     
     return (
-      <a href={node.data.url.url}>      
+          
         <Item>
         <Img sizes={node.data.feature.localFile.childImageSharp.sizes} />
         <Content>
+        
         <Headline>
-          {categories && <Categories categories={categories} />}
-        </Headline>
-        <StyledLink /*to={node.uid}*/>{node.data.title.text}</StyledLink>
-        <SliceZone allSlices={node.data.body} />
         {node.data.types &&
         <p>{node.data.types.document[0].data.name}</p>
         }
+        </Headline>
+        <StyledLink href={node.data.url.url} target="blank">{node.data.title.text}</StyledLink>
+        <SliceZone allSlices={node.data.body} />
+        
         </Content>
       </Item>
-      </a>
-
+      
     );
   }
 }

@@ -2,9 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
 import styled from 'react-emotion';
-import { Layout, Listing, Wrapper, Title, SEO, Header } from 'components';
+import { Layout, Listingv2, Wrapper, Title, SEO, Header } from 'components';
 import website from '../../config/website';
 import favicon from '../../static/logos/favicon.png';
+
+const Wrap = styled(Wrapper)`
+  max-width: 65vw;
+  margin: 0 auto;
+
+  @media (max-width: ${props => props.theme.breakpoints.s}) {
+    max-width: 100%; 
+  }
+`
 
 const Hero = styled.section`
   background: /*linear-gradient(90deg, #0E38A6 0%, #0181DE 100%)*/ white;
@@ -15,7 +24,6 @@ const Hero = styled.section`
   padding-bottom: 4rem;
   h1 {
     color: ${props => props.theme.colors.grey};
-    
   }
 `;
 
@@ -70,22 +78,22 @@ const Category = ({
     <SEO title={` Best ${category} Design Resources 2019 | Curated Design Pins on ${website._title}`} pathname={location.pathname} banner={`${data.image.localFile.childImageSharp.sizes.src}`} desc={`${data.description}`} keyword={`${data.keywords}`}/>
     <Hero>
     
-    <Wrapper style={{ zIndex: '2', position: 'relative'}}>
+    <Wrap style={{ zIndex: '2', position: 'relative',}}>
         <Header/>
         <Pagetitle>
         <Subtitle>Category</Subtitle>
         <Headline>{category}</Headline>
         <Description>{data.description}</Description>
         </Pagetitle>
-    </Wrapper>
+    </Wrap>
     {/*<Background src={Backgroundshape} />*/}
     </Hero>
-    <Wrapper>
+    <Wrap>
       <Title style={{ marginTop: '4rem' }}>
         {totalCount} {totalCount === 1 ? 'Post' : 'Posts'} {totalCount === 1 ? 'was' : 'were'} tagged with "{category}"
       </Title>
-      <Listing posts={edges} />
-    </Wrapper>
+      <Listingv2 posts={edges} />
+    </Wrap>
   </Layout>
 );
 
@@ -181,6 +189,16 @@ query CategoryPage($category: String!) {
                 document {
                   data {
                     name
+                  }
+                }
+              }
+            }
+            types {
+              document {
+                data {
+                  name 
+                  icon {
+                    url
                   }
                 }
               }

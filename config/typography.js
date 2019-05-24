@@ -1,4 +1,5 @@
 import Typography from 'typography';
+import '../src/components/font.css';
 
 // This website uses the system font stack after the placed "Lora" font
 // The scaleRatio will be overwritten for smaller breakpoints in src/components/Layout
@@ -8,7 +9,7 @@ const typography = new Typography({
   baseFontSize: '18px',
   baseLineHeight: 1.45,
   headerFontFamily: [
-    'IBM Plex Sans',
+    'Inter',
     'Roboto',
     '-apple-system',
     'BlinkMacSystemFont',
@@ -22,7 +23,7 @@ const typography = new Typography({
     'Segoe UI Symbol',
   ],
   bodyFontFamily: [
-    'IBM Plex Sans',
+    'Inter',
     'Roboto',
     '-apple-system',
     'BlinkMacSystemFont',

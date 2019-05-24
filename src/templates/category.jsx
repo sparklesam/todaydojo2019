@@ -2,20 +2,27 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
 import styled from 'react-emotion';
-import { Layout, Listing, Wrapper, Title, SEO, Header } from 'components';
+import { Navigation, Layout, Listingv2, Wrapper, Title, SEO } from 'components';
 import website from '../../config/website';
 import favicon from '../../static/logos/favicon.png';
+
+const Wrap = styled(Wrapper)`
+  max-width: 800px;
+  margin: 0 auto;
+
+  @media (max-width: ${props => props.theme.breakpoints.s}) {
+    max-width: 100%; 
+  }
+`
 
 const Hero = styled.section`
   background: /*linear-gradient(90deg, #0E38A6 0%, #0181DE 100%)*/ white;
   width: 100%;
   height: auto;
   position: relative;
-  padding-top: 1rem;
   padding-bottom: 4rem;
   h1 {
     color: ${props => props.theme.colors.grey};
-    
   }
 `;
 
@@ -61,6 +68,7 @@ const Category = ({
   data: {
     page: { data },
     posts: { edges, totalCount },
+    categories,
   },
   location,
   
@@ -69,23 +77,23 @@ const Category = ({
   <Layout>
     <SEO title={` Best ${category} Design Resources 2019 | Curated Design Pins on ${website._title}`} pathname={location.pathname} banner={`${data.image.localFile.childImageSharp.sizes.src}`} desc={`${data.description}`} keyword={`${data.keywords}`}/>
     <Hero>
-    
-    <Wrapper style={{ zIndex: '2', position: 'relative'}}>
-        <Header/>
+    <Navigation/>
+    <Wrap style={{ zIndex: '2', position: 'relative',}}>
+        
         <Pagetitle>
         <Subtitle>Category</Subtitle>
         <Headline>{category}</Headline>
         <Description>{data.description}</Description>
         </Pagetitle>
-    </Wrapper>
+    </Wrap>
     {/*<Background src={Backgroundshape} />*/}
     </Hero>
-    <Wrapper>
+    <Wrap>
       <Title style={{ marginTop: '4rem' }}>
         {totalCount} {totalCount === 1 ? 'Post' : 'Posts'} {totalCount === 1 ? 'was' : 'were'} tagged with "{category}"
       </Title>
-      <Listing posts={edges} />
-    </Wrapper>
+      <Listingv2 posts={edges} />
+    </Wrap>
   </Layout>
 );
 
@@ -185,6 +193,28 @@ query CategoryPage($category: String!) {
                 }
               }
             }
+            types {
+              document {
+                data {
+                  bgcolor
+                  textcolor
+                  name 
+                  icon {
+                    url
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    categories: allPrismicCategory(sort:{ fields: [data___name], order: ASC}) {
+      edges {
+        node {
+          id
+          data {
+            name
           }
         }
       }

@@ -7,8 +7,9 @@ import { injectGlobal } from 'emotion';
 import { ThemeProvider } from 'emotion-theming';
 import 'typeface-lora';
 import 'typeface-source-sans-pro';
-import { Footer, SEO } from 'components';
+import { Navigation, Footer, SEO } from 'components';
 import { theme, reset } from 'styles';
+
 
 injectGlobal`
   ${reset}
@@ -37,8 +38,6 @@ injectGlobal`
     color: ${theme.colors.primary};
     transition: all 0.4s ease-in-out;
     text-decoration: none;
-    font-weight: 700;
-    font-style: italic;
     &:hover, &:focus {
       color: ${theme.colors.primaryShade};
     }

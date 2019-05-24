@@ -156,7 +156,8 @@ query BetaQuery {
           	document {
               data {
                 name
-                color
+                bgcolor
+                textcolor
                 icon {
                   url
                 }
@@ -240,7 +241,8 @@ query BetaQuery {
             document {
               data {
                 name
-                color
+                bgcolor
+                textcolor
                 icon {
                   url
                 }

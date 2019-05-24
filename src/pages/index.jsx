@@ -337,7 +337,7 @@ query IndexQuery {
                 }
               }
             }
-            }
+          }
         }
       }
     }

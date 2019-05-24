@@ -46,16 +46,41 @@ const Headline = styled.p`
 const StyledLink = styled(Link)`
 */
 
-const StyledLink = /*(Link)*/ styled.div`
-  font-size: 32px;
-  line-height: 42px;
+const TypePill = styled.div`
+display: inline-block;
+border-radius: 10rem;
+text-align: center;
+justify-items: center;
+padding: 0.2rem 0.8rem;
+font-weight: 700;
+letter-spacing: 0.5px;
+text-transform: uppercase;
+font-size: 0.8rem;
+`
+
+const TypeIcon = styled.img`
+width: 15px;
+margin-right: 0.2rem;
+margin-top: -0.2rem;
+`
+
+const StyledLink = styled.a`
+  font-size: 1.5rem;
+  line-height: 2rem;
   color: #2F3D61;
   font-weight: 700;
-  cursor: auto; 
+  cursor: pointer; 
   /*color: ${props => props.theme.colors.black};*/
   font-style: normal;
+  transition: background-size .4s ease;
+  background: linear-gradient(to bottom, transparent 62%, #ffd644 0) left center/0% 75% no-repeat;
+
   @media (max-width: ${props => props.theme.breakpoints.s}) {
-    font-size: 1.777rem;
+    font-size: 1.777rem;  
+  }
+
+  &:hover {
+    background-size: 100% 100%;
   }
 `;
 
@@ -84,22 +109,18 @@ export default class ListItem extends Component {
     const { node, categories } = this.props;
     
     return (
-      <a href={node.data.url.url}>      
+          
         <Item>
         <Img sizes={node.data.feature.localFile.childImageSharp.sizes} />
         <Content>
-        <Headline>
-          {categories && <Categories categories={categories} />}
-        </Headline>
-        <StyledLink /*to={node.uid}*/>{node.data.title.text}</StyledLink>
+        <StyledLink href={node.data.url.url} target="blank">{node.data.title.text}</StyledLink>
         <SliceZone allSlices={node.data.body} />
         {node.data.types &&
-        <p>{node.data.types.document[0].data.name}</p>
+          <TypePill style={{ background: `${node.data.types.document[0].data.bgcolor}`, color: `${node.data.types.document[0].data.textcolor}`}} ><TypeIcon src={node.data.types.document[0].data.icon.url} /> {node.data.types.document[0].data.name}</TypePill>
         }
         </Content>
       </Item>
-      </a>
-
+      
     );
   }
 }

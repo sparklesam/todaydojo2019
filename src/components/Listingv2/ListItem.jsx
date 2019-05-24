@@ -59,14 +59,14 @@ font-size: 0.8rem;
 `
 
 const TypeIcon = styled.img`
-width: 10px;
+width: 15px;
 margin-right: 0.2rem;
 margin-top: -0.2rem;
 `
 
 const StyledLink = styled.a`
-  font-size: 32px;
-  line-height: 42px;
+  font-size: 1.5rem;
+  line-height: 2rem;
   color: #2F3D61;
   font-weight: 700;
   cursor: pointer; 

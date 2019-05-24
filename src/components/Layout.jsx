@@ -7,7 +7,7 @@ import { injectGlobal } from 'emotion';
 import { ThemeProvider } from 'emotion-theming';
 import 'typeface-lora';
 import 'typeface-source-sans-pro';
-import { Footer, SEO } from 'components';
+import { Navigation, Footer, SEO } from 'components';
 import { theme, reset } from 'styles';
 
 

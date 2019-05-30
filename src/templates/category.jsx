@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
 import styled from 'react-emotion';
-import { Layout, Listingv2, Wrapper, Title, SEO, Header } from 'components';
+import { Navigation, Layout, Listingv2, Wrapper, Title, SEO } from 'components';
 import website from '../../config/website';
 import favicon from '../../static/logos/favicon.png';
 
@@ -20,7 +20,6 @@ const Hero = styled.section`
   width: 100%;
   height: auto;
   position: relative;
-  padding-top: 1rem;
   padding-bottom: 4rem;
   h1 {
     color: ${props => props.theme.colors.grey};
@@ -70,6 +69,7 @@ const Category = ({
   data: {
     page: { data },
     posts: { edges, totalCount },
+    categories,
   },
   location,
   
@@ -78,9 +78,9 @@ const Category = ({
   <Layout>
     <SEO title={` Best ${category} Design Resources 2019 | Curated Design Pins on ${website._title}`} pathname={location.pathname} banner={`${data.image.localFile.childImageSharp.sizes.src}`} desc={`${data.description}`} keyword={`${data.keywords}`}/>
     <Hero>
-    
+    <Navigation/>
     <Wrap style={{ zIndex: '2', position: 'relative',}}>
-        <Header/>
+        
         <Pagetitle>
         <Subtitle>Category</Subtitle>
         <Headline>{category}</Headline>
@@ -206,6 +206,16 @@ query CategoryPage($category: String!) {
                 }
               }
             }
+          }
+        }
+      }
+    }
+    categories: allPrismicCategory(sort:{ fields: [data___name], order: ASC}) {
+      edges {
+        node {
+          id
+          data {
+            name
           }
         }
       }

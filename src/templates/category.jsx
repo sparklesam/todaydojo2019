@@ -24,6 +24,7 @@ const Hero = styled.section`
   padding-bottom: 4rem;
   h1 {
     color: ${props => props.theme.colors.grey};
+    font-weight: 600;
   }
 `;
 

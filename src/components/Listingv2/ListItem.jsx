@@ -11,7 +11,10 @@ const Item = styled.li`
   margin-bottom: 1.45rem;
   background: #FBFBFB;
   transition: box-shadow .2s ease-in-out;
-  
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 16px;
+  padding: 1rem;
 
   &:hover {
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
@@ -65,10 +68,10 @@ margin-top: -0.2rem;
 `
 
 const StyledLink = styled.a`
-  font-size: 32px;
-  line-height: 42px;
+  font-size: 24px;
+  line-height: 30px;
   color: #2F3D61;
-  font-weight: 700;
+  font-weight: 600;
   cursor: pointer; 
   /*color: ${props => props.theme.colors.black};*/
   font-style: normal;
@@ -111,7 +114,7 @@ export default class ListItem extends Component {
     return (
           
         <Item>
-        <Img sizes={node.data.feature.localFile.childImageSharp.sizes} />
+        
         <Content>
         <StyledLink href={node.data.url.url} target="blank">{node.data.title.text}</StyledLink>
         <SliceZone allSlices={node.data.body} />
@@ -119,6 +122,7 @@ export default class ListItem extends Component {
           <TypePill style={{ background: `${node.data.types.document[0].data.bgcolor}`, color: `${node.data.types.document[0].data.textcolor}`}} ><TypeIcon src={node.data.types.document[0].data.icon.url} /> {node.data.types.document[0].data.name}</TypePill>
         }
         </Content>
+        <Img sizes={node.data.feature.localFile.childImageSharp.sizes} />
       </Item>
       
     );

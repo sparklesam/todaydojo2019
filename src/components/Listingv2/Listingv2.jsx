@@ -8,9 +8,8 @@ const List = styled.ul`
   margin: 0 auto;
   list-style-type: none;
   margin-left: 0;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 20px;
+  display: block;
+
 
   @media (max-width: ${theme.breakpoints.m}) {
   grid-template-columns: 1fr;

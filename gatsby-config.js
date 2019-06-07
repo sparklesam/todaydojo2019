@@ -247,6 +247,15 @@ module.exports = {
                         }
                       }
                       date
+                      categories {
+                        category {
+                          document {
+                            data {
+                              name
+                            }
+                          }
+                        }
+                      }
                     }
                   }
                 }

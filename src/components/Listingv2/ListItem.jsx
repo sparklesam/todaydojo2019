@@ -1,17 +1,15 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'react-emotion';
-import Img from 'gatsby-image';
-import { Link } from 'gatsby';
-import { Categories } from 'components/Listingv2';
-import { SliceZone } from 'components'
-
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import styled from "react-emotion";
+import Img from "gatsby-image";
+import { Link } from "gatsby";
+import { Categories } from "components/Listingv2";
+import { SliceZone } from "components";
 
 const Item = styled.li`
   margin-bottom: 1.45rem;
-  background: #FBFBFB;
-  transition: box-shadow .2s ease-in-out;
-  
+  background: #fbfbfb;
+  transition: box-shadow 0.2s ease-in-out;
 
   &:hover {
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
@@ -20,7 +18,7 @@ const Item = styled.li`
 
 const Content = styled.div`
   padding: 1em;
-`
+`;
 
 const Headline = styled.p`
   /*font-family: 'Source Sans Pro', -apple-system, 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial',
@@ -47,22 +45,22 @@ const StyledLink = styled(Link)`
 */
 
 const TypePill = styled.div`
-display: inline-block;
-border-radius: 10rem;
-text-align: center;
-justify-items: center;
-padding: 0.2rem 0.8rem;
-font-weight: 700;
-letter-spacing: 0.5px;
-text-transform: uppercase;
-font-size: 0.8rem;
-`
+  display: inline-block;
+  border-radius: 10rem;
+  text-align: center;
+  justify-items: center;
+  padding: 0.2rem 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+`;
 
 const TypeIcon = styled.img`
-width: 15px;
-margin-right: 0.2rem;
-margin-top: -0.2rem;
-`
+  width: 15px;
+  margin-right: 0.2rem;
+  margin-top: -0.2rem;
+`;
 
 const StyledLink = styled.a`
   font-size: 1.5rem;
@@ -85,21 +83,21 @@ const StyledLink = styled.a`
 `;
 
 const BrowseButton = styled.button`
-  font-family: 'Roboto', 'Arial';
+  font-family: "Roboto", "Arial";
   display: block;
-  color: #1FDCBA;
+  color: #1fdcba;
   font-style: normal;
-  background-color: #E7FDF9;
+  background-color: #e7fdf9;
   border: none;
   border-radius: 25px;
   padding: 8px 24px;
   font-size: 16px;
   font-weight: 600;
-  transition: all .2s ease-in-out;
-  &:hover  {
-    background-color: #D5F4EE;
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    background-color: #d5f4ee;
     cursor: pointer;
-    color: #13CBAA;
+    color: #13cbaa;
     text-decoration: none;
   }
 `;
@@ -107,25 +105,33 @@ const BrowseButton = styled.button`
 export default class ListItem extends Component {
   render() {
     const { node, categories } = this.props;
-    
+
     return (
-          
-        <Item>
-        <Img sizes={node.data.feature.localFile.childImageSharp.sizes} />
+      <Item>
+        <Img fluid={node.data.feature.localFile.childImageSharp.fluid} />
         <Content>
-        <StyledLink href={node.data.url.url} target="blank">{node.data.title.text}</StyledLink>
-        <SliceZone allSlices={node.data.body} />
-        {node.data.types &&
-          <TypePill style={{ background: `${node.data.types.document[0].data.bgcolor}`, color: `${node.data.types.document[0].data.textcolor}`}} ><TypeIcon src={node.data.types.document[0].data.icon.url} /> {node.data.types.document[0].data.name}</TypePill>
-        }
+          <StyledLink href={node.data.url.url} target="blank">
+            {node.data.title.text}
+          </StyledLink>
+          <SliceZone allSlices={node.data.body} />
+          {node.data.types && (
+            <TypePill
+              style={{
+                background: `${node.data.types.document[0].data.bgcolor}`,
+                color: `${node.data.types.document[0].data.textcolor}`
+              }}
+            >
+              <TypeIcon src={node.data.types.document[0].data.icon.url} />{" "}
+              {node.data.types.document[0].data.name}
+            </TypePill>
+          )}
         </Content>
       </Item>
-      
     );
   }
 }
 
 ListItem.propTypes = {
   node: PropTypes.object.isRequired,
-  categories: PropTypes.array.isRequired,
+  categories: PropTypes.array.isRequired
 };

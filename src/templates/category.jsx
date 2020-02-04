@@ -77,7 +77,7 @@ const Category = ({
         website._title
       }`}
       pathname={location.pathname}
-      banner={`${data.image.localFile.childImageSharp.publicURL}`}
+      banner={`${data.image.localFile.publicURL}`}
       desc={`${data.description}`}
       keyword={`${data.keywords}`}
     />
@@ -127,6 +127,7 @@ export const pageQuery = graphql`
         image {
           localFile {
             id
+            publicURL
             childImageSharp {
               fluid(maxWidth: 1280) {
                 src

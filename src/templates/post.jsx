@@ -112,7 +112,7 @@ const Post = ({ data: { prismicPost, posts }, location }) => {
         title={`${data.title.text} | ${website._title}`}
         pathname={location.pathname}
         article
-        banner={`${data.feature.localFile.childImageSharp.publicURL}`}
+        banner={`${data.feature.localFile.publicURL}`}
       />
       <Hero>
         <Wrapper style={{ zIndex: "2", position: "relative" }}>
@@ -179,6 +179,7 @@ export const pageQuery = graphql`
           url
           localFile {
             id
+            publicURL
             childImageSharp {
               fluid(maxWidth: 1280) {
                 src

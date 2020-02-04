@@ -139,11 +139,11 @@ const Post = ({ data: { prismicPost, posts }, location }) => {
             </Description>
             <SliceZone allSlices={data.body} />
           </div>
-          {data.feature && (
-            <ImageWrapper>
+          <ImageWrapper>
+            {data.feature && (
               <Img fluid={data.feature.localFile.childImageSharp.fluid} />
-            </ImageWrapper>
-          )}
+            )}
+          </ImageWrapper>
         </Grid>
         <Title style={{ marginTop: "4rem" }}>Recent posts</Title>
         <Listing posts={posts.edges} />

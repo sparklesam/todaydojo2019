@@ -108,7 +108,9 @@ export default class ListItem extends Component {
 
     return (
       <Item>
-        <Img fluid={node.data.feature.localFile.childImageSharp.fluid} />
+        {node.data.feature && (
+          <Img fluid={node.data.feature.localFile.childImageSharp.fluid} />
+        )}
         <Content>
           <StyledLink href={node.data.url.url} target="blank">
             {node.data.title.text}

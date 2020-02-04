@@ -14,6 +14,7 @@
     "lint:md": "prettier --write *.md"
   },
   "dependencies": {
+    "check-node-version": "^4.0.2",
     "emotion": "^9.2.12",
     "emotion-server": "^9.2.12",
     "emotion-theming": "^9.2.9",

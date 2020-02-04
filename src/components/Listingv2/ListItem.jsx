@@ -108,7 +108,7 @@ export default class ListItem extends Component {
 
     return (
       <Item>
-        {node.data.feature && (
+        {node.data.feature.localFile.childImageSharp.fluid && (
           <Img fluid={node.data.feature.localFile.childImageSharp.fluid} />
         )}
         <Content>

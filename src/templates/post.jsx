@@ -139,7 +139,7 @@ const Post = ({ data: { prismicPost, posts }, location }) => {
             </Description>
             <SliceZone allSlices={data.body} />
           </div>
-          {data.feature && (
+          {data.feature.localFile.childImageSharp.fluid && (
             <ImageWrapper>
               <Img fluid={data.feature.localFile.childImageSharp.fluid} />
             </ImageWrapper>
@@ -182,12 +182,7 @@ export const pageQuery = graphql`
             publicURL
             childImageSharp {
               fluid(maxWidth: 1280) {
-                src
-                srcSet
-                srcWebp
-                srcSetWebp
-                aspectRatio
-                sizes
+                ...GatsbyImageSharpFluid_withWebp
               }
             }
           }

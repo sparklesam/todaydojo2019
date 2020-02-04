@@ -139,6 +139,7 @@ const Post = ({ data: { prismicPost, posts }, location }) => {
             </Description>
             <SliceZone allSlices={data.body} />
           </div>
+
           <ImageWrapper>
             {data.feature && (
               <Img fluid={data.feature.localFile.childImageSharp.fluid} />

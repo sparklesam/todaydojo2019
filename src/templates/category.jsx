@@ -130,11 +130,7 @@ export const pageQuery = graphql`
             publicURL
             childImageSharp {
               fluid(maxWidth: 1280) {
-                src
-                srcSet
-                srcWebp
-                srcSetWebp
-                aspectRatio
+                ...GatsbyImageSharpFluid_withWebp
               }
             }
           }
@@ -169,13 +165,7 @@ export const pageQuery = graphql`
                 id
                 childImageSharp {
                   fluid(maxWidth: 1280) {
-                    src
-                    srcSet
-                    srcWebp
-                    srcSetWebp
-                    base64
-                    aspectRatio
-                    sizes
+                    ...GatsbyImageSharpFluid_withWebp
                   }
                 }
               }

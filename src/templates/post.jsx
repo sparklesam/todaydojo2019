@@ -139,7 +139,7 @@ const Post = ({ data: { prismicPost, posts }, location }) => {
             </Description>
             <SliceZone allSlices={data.body} />
           </div>
-          {data.feature.localFile.childImageSharp.fluid && (
+          {data.feature && (
             <ImageWrapper>
               <Img fluid={data.feature.localFile.childImageSharp.fluid} />
             </ImageWrapper>

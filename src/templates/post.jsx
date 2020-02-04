@@ -112,7 +112,7 @@ const Post = ({ data: { prismicPost, posts }, location }) => {
         title={`${data.title.text} | ${website._title}`}
         pathname={location.pathname}
         article
-        banner={`${data.feature.localFile.childImageSharp.fluid.src}`}
+        banner={`${data.feature.localFile.childImageSharp.publicURL}`}
       />
       <Hero>
         <Wrapper style={{ zIndex: "2", position: "relative" }}>

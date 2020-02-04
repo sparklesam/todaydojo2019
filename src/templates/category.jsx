@@ -77,7 +77,7 @@ const Category = ({
         website._title
       }`}
       pathname={location.pathname}
-      banner={`${data.image.localFile.childImageSharp.fluid.sizes}`}
+      banner={`${data.image.localFile.childImageSharp.publicURL}`}
       desc={`${data.description}`}
       keyword={`${data.keywords}`}
     />

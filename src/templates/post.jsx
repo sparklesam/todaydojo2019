@@ -141,8 +141,10 @@ const Post = ({ data: { prismicPost, posts }, location }) => {
           </div>
 
           <ImageWrapper>
-            {data.feature && (
+            {!!data.feature && !!data ? (
               <Img fluid={data.feature.localFile.childImageSharp.fluid} />
+            ) : (
+              <Img src={data.feature.localFile.publicURL} />
             )}
           </ImageWrapper>
         </Grid>

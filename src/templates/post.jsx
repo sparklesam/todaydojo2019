@@ -11,7 +11,7 @@ import {
   SliceZone,
   Title,
   SEO,
-  Header
+  Header,
 } from "components";
 import Categories from "../components/Listing/Categories";
 import website from "../../config/website";
@@ -27,7 +27,7 @@ const Hero = styled.section`
   padding-bottom: 4rem;
 
   h1 {
-    color: ${props => props.theme.colors.grey};
+    color: ${(props) => props.theme.colors.grey};
   }
 `;
 
@@ -56,16 +56,16 @@ const Headline = styled.p`
   font-family: "Source Sans Pro", -apple-system, "BlinkMacSystemFont",
     "Segoe UI", "Roboto", "Helvetica", "Arial", sans-serif, "Apple Color Emoji",
     "Segoe UI Emoji", "Segoe UI Symbol";
-  color: ${props => props.theme.colors.greyBlue};
+  color: ${(props) => props.theme.colors.greyBlue};
   font-size: 1.25rem;
   margin-top: 4em;
   a {
     font-style: normal;
     font-weight: normal;
-    color: ${props => props.theme.colors.greyBlue};
+    color: ${(props) => props.theme.colors.greyBlue};
   }
   h6 {
-    color: ${props => props.theme.colors.greyBlue};
+    color: ${(props) => props.theme.colors.greyBlue};
   }
 `;
 
@@ -96,7 +96,7 @@ const BrowseButton = styled.button`
 const Description = styled.div`
   padding: 2vh 0 0 0;
   h6 {
-    color: ${props => props.theme.colors.greyBlue};
+    color: ${(props) => props.theme.colors.greyBlue};
   }
 `;
 
@@ -104,7 +104,7 @@ const Post = ({ data: { prismicPost, posts }, location }) => {
   const { data } = prismicPost;
   let categories = false;
   if (data.categories[0].category) {
-    categories = data.categories.map(c => c.category.document[0].data.name);
+    categories = data.categories.map((c) => c.category.document.data.name);
   }
   return (
     <Layout>
@@ -112,7 +112,7 @@ const Post = ({ data: { prismicPost, posts }, location }) => {
         title={`${data.title.text} | ${website._title}`}
         pathname={location.pathname}
         article
-        banner={`${data.feature.localFile.publicURL}`}
+        banner={`${data.feature.url}`}
       />
       <Hero>
         <Wrapper style={{ zIndex: "2", position: "relative" }}>
@@ -140,13 +140,13 @@ const Post = ({ data: { prismicPost, posts }, location }) => {
             <SliceZone allSlices={data.body} />
           </div>
 
-          <ImageWrapper>
+          {/* <ImageWrapper>
             {!!data.feature && !!data ? (
-              <Img fluid={data.feature.localFile.childImageSharp.fluid} />
+              <Img fluid={data.feature.fluid} />
             ) : (
-              <Img src={data.feature.localFile.publicURL} />
+              <Img src={data.feature.url} />
             )}
-          </ImageWrapper>
+          </ImageWrapper> */}
         </Grid>
         <Title style={{ marginTop: "4rem" }}>Recent posts</Title>
         <Listing posts={posts.edges} />
@@ -159,9 +159,9 @@ export default Post;
 
 Post.propTypes = {
   data: PropTypes.shape({
-    prismicPost: PropTypes.object.isRequired
+    prismicPost: PropTypes.object.isRequired,
   }).isRequired,
-  location: PropTypes.object.isRequired
+  location: PropTypes.object.isRequired,
 };
 
 // The typenames come from the slice names
@@ -180,22 +180,18 @@ export const pageQuery = graphql`
         }
         feature {
           url
-          localFile {
-            id
-            publicURL
-            childImageSharp {
-              fluid(maxWidth: 1280) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
+          fluid {
+            ...GatsbyPrismicImageFluid
           }
         }
         date(formatString: "DD.MM.YYYY")
         categories {
           category {
             document {
-              data {
-                name
+              ... on PrismicCategory {
+                data {
+                  name
+                }
               }
             }
           }
@@ -210,26 +206,13 @@ export const pageQuery = graphql`
               }
             }
           }
-          ... on PrismicPostBodyCodeBlock {
-            slice_type
-            id
-            primary {
-              code_block {
-                html
-              }
-            }
-          }
           ... on PrismicPostBodyImage {
             slice_type
             id
             primary {
               image {
-                localFile {
-                  childImageSharp {
-                    fluid(maxWidth: 1200, quality: 90) {
-                      ...GatsbyImageSharpFluid_withWebp
-                    }
-                  }
+                fluid {
+                  ...GatsbyPrismicImageFluid
                 }
               }
             }
@@ -263,26 +246,19 @@ export const pageQuery = graphql`
               }
             }
             feature {
-              localFile {
-                id
-                childImageSharp {
-                  fluid(maxWidth: 1280) {
-                    src
-                    srcSet
-                    srcWebp
-                    srcSetWebp
-                    aspectRatio
-                    sizes
-                  }
-                }
+              url
+              fluid {
+                ...GatsbyPrismicImageFluid
               }
             }
             date(formatString: "DD.MM.YYYY")
             categories {
               category {
                 document {
-                  data {
-                    name
+                  ... on PrismicCategory {
+                    data {
+                      name
+                    }
                   }
                 }
               }

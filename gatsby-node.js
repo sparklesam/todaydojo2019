@@ -1,5 +1,5 @@
-const path = require('path');
-const _ = require('lodash');
+const path = require("path");
+const _ = require("lodash");
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
@@ -15,8 +15,10 @@ exports.createPages = async ({ graphql, actions }) => {
               categories {
                 category {
                   document {
-                    data {
-                      name
+                    ... on PrismicCategory {
+                      data {
+                        name
+                      }
                     }
                   }
                 }
@@ -28,16 +30,16 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `);
 
-  const postTemplate = path.resolve('src/templates/post.jsx');
-  const categoryTemplate = path.resolve('src/templates/category.jsx');
+  const postTemplate = path.resolve("src/templates/post.jsx");
+  const categoryTemplate = path.resolve("src/templates/category.jsx");
 
   const categorySet = new Set();
   const postsList = pages.data.allPrismicPost.edges;
 
-  postsList.forEach(edge => {
+  postsList.forEach((edge) => {
     if (edge.node.data.categories[0].category) {
-      edge.node.data.categories.forEach(cat => {
-        categorySet.add(cat.category.document[0].data.name);
+      edge.node.data.categories.forEach((cat) => {
+        categorySet.add(cat.category.document.data.name);
       });
     }
 
@@ -51,7 +53,7 @@ exports.createPages = async ({ graphql, actions }) => {
   });
 
   const categoryList = Array.from(categorySet);
-  categoryList.forEach(category => {
+  categoryList.forEach((category) => {
     createPage({
       path: `/categories/${_.kebabCase(category)}`,
       component: categoryTemplate,
@@ -66,7 +68,7 @@ exports.createPages = async ({ graphql, actions }) => {
 exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
     resolve: {
-      modules: [path.resolve(__dirname, 'src'), 'node_modules'],
+      modules: [path.resolve(__dirname, "src"), "node_modules"],
     },
   });
 };

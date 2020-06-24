@@ -10,7 +10,7 @@ const Wrap = styled(Wrapper)`
   max-width: 800px;
   margin: 0 auto;
 
-  @media (max-width: ${props => props.theme.breakpoints.s}) {
+  @media (max-width: ${(props) => props.theme.breakpoints.s}) {
     max-width: 100%;
   }
 `;
@@ -22,7 +22,7 @@ const Hero = styled.section`
   position: relative;
   padding-bottom: 4rem;
   h1 {
-    color: ${props => props.theme.colors.grey};
+    color: ${(props) => props.theme.colors.grey};
   }
 `;
 
@@ -41,7 +41,7 @@ const Background = styled.img`
 `;
 
 const Subtitle = styled.p`
-  color: ${props => props.theme.colors.greyBlue};
+  color: ${(props) => props.theme.colors.greyBlue};
   font-size: 1.25rem;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -58,7 +58,7 @@ const Headline = styled.h1`
 `;
 
 const Description = styled.p`
-  color: ${props => props.theme.colors.grey};
+  color: ${(props) => props.theme.colors.grey};
   font-size: 1rem;
 `;
 
@@ -66,16 +66,14 @@ const Category = ({
   pageContext: { category },
   data: {
     page: { data },
-    posts: { edges, totalCount },
-    categories
+    // posts: { edges, totalCount },
+    // categories,
   },
-  location
+  location,
 }) => (
   <Layout>
     <SEO
-      title={` Best ${category} Design Resources 2019 | Curated Design Pins on ${
-        website._title
-      }`}
+      title={` Best ${category} Design Resources 2019 | Curated Design Pins on ${website._title}`}
       pathname={location.pathname}
       banner={`${data.image.localFile.publicURL}`}
       desc={`${data.description}`}
@@ -106,122 +104,104 @@ export default Category;
 
 Category.propTypes = {
   pageContext: PropTypes.shape({
-    category: PropTypes.string.isRequired
+    category: PropTypes.string.isRequired,
   }).isRequired,
   data: PropTypes.shape({
     posts: PropTypes.shape({
       edges: PropTypes.array.isRequired,
-      totalCount: PropTypes.number.isRequired
-    }).isRequired
+      totalCount: PropTypes.number.isRequired,
+    }).isRequired,
   }).isRequired,
-  location: PropTypes.object.isRequired
+  location: PropTypes.object.isRequired,
 };
 
 export const pageQuery = graphql`
-  query CategoryPage($category: String!) {
-    page: prismicCategory(data: { name: { eq: $category } }) {
+  query CategoryPage($id: String!) {
+    page: prismicCategory(id: { eq: $id }) {
       data {
-        name
         description
         keywords
+        name
         image {
-          localFile {
-            id
-            publicURL
-            childImageSharp {
-              fluid(maxWidth: 1280) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
-        }
-      }
-    }
-    posts: allPrismicPost(
-      sort: { fields: [data___date], order: DESC }
-      filter: {
-        data: {
-          categories: {
-            elemMatch: {
-              category: {
-                document: { elemMatch: { data: { name: { eq: $category } } } }
-              }
-            }
-          }
-        }
-      }
-    ) {
-      totalCount
-      edges {
-        node {
-          uid
-          data {
-            title {
-              text
-            }
-            feature {
-              url
-              localFile {
-                id
-                publicURL
-                childImageSharp {
-                  fluid(maxWidth: 1280) {
-                    ...GatsbyImageSharpFluid_withWebp
-                  }
-                }
-              }
-            }
-            url {
-              url
-            }
-            body {
-              ... on PrismicPostBodyText {
-                slice_type
-                id
-                primary {
-                  text {
-                    html
-                  }
-                }
-              }
-            }
-            date(formatString: "DD.MM.YYYY")
-            categories {
-              category {
-                document {
-                  data {
-                    name
-                  }
-                }
-              }
-            }
-            types {
-              document {
-                data {
-                  bgcolor
-                  textcolor
-                  name
-                  icon {
-                    url
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-    categories: allPrismicCategory(
-      sort: { fields: [data___name], order: ASC }
-    ) {
-      edges {
-        node {
-          id
-          data {
-            name
+          fluid {
+            src
           }
         }
       }
     }
   }
 `;
+
+// posts: allPrismicPost(
+//       sort: { fields: [data___date], order: DESC }
+//       filter: {
+//         data: {
+//           categories: { elemMatch: { category: { id: { eq: $categoryid } } } }
+//         }
+//       }
+//     ) {
+//       totalCount
+//       edges {
+//         node {
+//           uid
+//           data {
+//             title {
+//               text
+//             }
+//             feature {
+//               url
+//               localFile {
+//                 id
+//                 publicURL
+//                 childImageSharp {
+//                   fluid(maxWidth: 1280) {
+//                     src
+//                   }
+//                 }
+//               }
+//             }
+//             url {
+//               url
+//             }
+//             body {
+//               ... on PrismicPostBodyText {
+//                 slice_type
+//                 id
+//                 primary {
+//                   text {
+//                     html
+//                   }
+//                 }
+//               }
+//             }
+//             date(formatString: "DD.MM.YYYY")
+//             categories {
+//               category {
+//                 document {
+//                   ... on PrismicCategory {
+//                     data {
+//                       name
+//                     }
+//                   }
+//                 }
+//               }
+//             }
+//             types {
+//               document {
+//                 ... on PrismicType {
+//                   data {
+//                     bgcolor
+//                     textcolor
+//                     name
+//                     icon {
+//                       url
+//                     }
+//                   }
+//                 }
+//               }
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }

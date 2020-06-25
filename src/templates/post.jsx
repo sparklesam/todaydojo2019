@@ -140,13 +140,13 @@ const Post = ({ data: { prismicPost, posts }, location }) => {
             <SliceZone allSlices={data.body} />
           </div>
 
-          {/* <ImageWrapper>
+          <ImageWrapper>
             {!!data.feature && !!data ? (
               <Img fluid={data.feature.fluid} />
             ) : (
               <Img src={data.feature.url} />
             )}
-          </ImageWrapper> */}
+          </ImageWrapper>
         </Grid>
         <Title style={{ marginTop: "4rem" }}>Recent posts</Title>
         <Listing posts={posts.edges} />
@@ -211,6 +211,7 @@ export const pageQuery = graphql`
             id
             primary {
               image {
+                url
                 fluid {
                   ...GatsbyPrismicImageFluid
                 }

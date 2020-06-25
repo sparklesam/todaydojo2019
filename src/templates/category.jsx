@@ -66,8 +66,8 @@ const Category = ({
   pageContext: { category },
   data: {
     page: { data },
-    // posts: { edges, totalCount },
-    // categories,
+    posts: { edges, totalCount },
+    categories,
   },
   location,
 }) => (
@@ -75,7 +75,7 @@ const Category = ({
     <SEO
       title={` Best ${category} Design Resources 2019 | Curated Design Pins on ${website._title}`}
       pathname={location.pathname}
-      banner={`${data.image.localFile.publicURL}`}
+      banner={`${data.image.fluid}`}
       desc={`${data.description}`}
       keyword={`${data.keywords}`}
     />
@@ -116,92 +116,102 @@ Category.propTypes = {
 };
 
 export const pageQuery = graphql`
-  query CategoryPage($id: String!) {
-    page: prismicCategory(id: { eq: $id }) {
+  query CategoryPage($category: String!) {
+    page: prismicCategory(data: { name: { eq: $category } }) {
       data {
+        name
         description
         keywords
-        name
         image {
           fluid {
-            src
+            ...GatsbyPrismicImageFluid
+          }
+        }
+      }
+    }
+    posts: allPrismicPost(
+      sort: { fields: [data___date], order: DESC }
+      filter: {
+        data: {
+          categories: { elemMatch: { category: { uid: { eq: $category } } } }
+        }
+      }
+    ) {
+      totalCount
+      edges {
+        node {
+          uid
+          data {
+            title {
+              text
+            }
+            feature {
+              url
+              localFile {
+                id
+                publicURL
+                childImageSharp {
+                  fluid(maxWidth: 1280) {
+                    ...GatsbyImageSharpFluid_withWebp
+                  }
+                }
+              }
+            }
+            url {
+              url
+            }
+            body {
+              ... on PrismicPostBodyText {
+                slice_type
+                id
+                primary {
+                  text {
+                    html
+                  }
+                }
+              }
+            }
+            date(formatString: "DD.MM.YYYY")
+            categories {
+              category {
+                document {
+                  ... on PrismicCategory {
+                    data {
+                      name
+                    }
+                  }
+                }
+              }
+            }
+            types {
+              document {
+                ... on PrismicType {
+                  data {
+                    bgcolor
+                    textcolor
+                    name
+                    icon {
+                      url
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    categories: allPrismicCategory(
+      sort: { fields: [data___name], order: ASC }
+    ) {
+      edges {
+        node {
+          id
+          data {
+            name
           }
         }
       }
     }
   }
 `;
-
-// posts: allPrismicPost(
-//       sort: { fields: [data___date], order: DESC }
-//       filter: {
-//         data: {
-//           categories: { elemMatch: { category: { id: { eq: $categoryid } } } }
-//         }
-//       }
-//     ) {
-//       totalCount
-//       edges {
-//         node {
-//           uid
-//           data {
-//             title {
-//               text
-//             }
-//             feature {
-//               url
-//               localFile {
-//                 id
-//                 publicURL
-//                 childImageSharp {
-//                   fluid(maxWidth: 1280) {
-//                     src
-//                   }
-//                 }
-//               }
-//             }
-//             url {
-//               url
-//             }
-//             body {
-//               ... on PrismicPostBodyText {
-//                 slice_type
-//                 id
-//                 primary {
-//                   text {
-//                     html
-//                   }
-//                 }
-//               }
-//             }
-//             date(formatString: "DD.MM.YYYY")
-//             categories {
-//               category {
-//                 document {
-//                   ... on PrismicCategory {
-//                     data {
-//                       name
-//                     }
-//                   }
-//                 }
-//               }
-//             }
-//             types {
-//               document {
-//                 ... on PrismicType {
-//                   data {
-//                     bgcolor
-//                     textcolor
-//                     name
-//                     icon {
-//                       url
-//                     }
-//                   }
-//                 }
-//               }
-//             }
-//           }
-//         }
-//       }
-//     }
-//   }

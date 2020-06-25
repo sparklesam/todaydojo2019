@@ -23,7 +23,7 @@ const Content = styled.div`
 const Headline = styled.p`
   /*font-family: 'Source Sans Pro', -apple-system, 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial',
     sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';*/
-  /* color: ${props => props.theme.colors.grey};*/
+  /* color: ${(props) => props.theme.colors.grey};*/
   color: #979DAD;
   margin-bottom: 5px;
   font-weight: 500;
@@ -34,7 +34,7 @@ const Headline = styled.p`
   color: #BABABA;
   a {
     color: #BABABA;
-    /*color: ${props => props.theme.colors.grey};*/
+    /*color: ${(props) => props.theme.colors.grey};*/
     font-style: normal;
     font-weight: 500;
   }
@@ -68,12 +68,12 @@ const StyledLink = styled.a`
   color: #2F3D61;
   font-weight: 700;
   cursor: pointer; 
-  /*color: ${props => props.theme.colors.black};*/
+  /*color: ${(props) => props.theme.colors.black};*/
   font-style: normal;
   transition: background-size .4s ease;
   background: linear-gradient(to bottom, transparent 62%, #ffd644 0) left center/0% 75% no-repeat;
 
-  @media (max-width: ${props => props.theme.breakpoints.s}) {
+  @media (max-width: ${(props) => props.theme.breakpoints.s}) {
     font-size: 1.777rem;  
   }
 
@@ -109,7 +109,7 @@ export default class ListItem extends Component {
     return (
       <Item>
         {!!node.data && !!node.data.feature ? (
-          <Img fluid={node.data.feature.localFile.childImageSharp.fluid} />
+          <Img fluid={node.data.feature.fluid} />
         ) : (
           <Img src={node.data.feature.localfile.publicURL} />
         )}
@@ -121,12 +121,12 @@ export default class ListItem extends Component {
           {node.data.types && (
             <TypePill
               style={{
-                background: `${node.data.types.document[0].data.bgcolor}`,
-                color: `${node.data.types.document[0].data.textcolor}`
+                background: `${node.data.types.document.data.bgcolor}`,
+                color: `${node.data.types.document.data.textcolor}`,
               }}
             >
-              <TypeIcon src={node.data.types.document[0].data.icon.url} />{" "}
-              {node.data.types.document[0].data.name}
+              <TypeIcon src={node.data.types.documen.data.icon.url} />{" "}
+              {node.data.types.document.data.name}
             </TypePill>
           )}
         </Content>
@@ -137,5 +137,5 @@ export default class ListItem extends Component {
 
 ListItem.propTypes = {
   node: PropTypes.object.isRequired,
-  categories: PropTypes.array.isRequired
+  categories: PropTypes.array.isRequired,
 };

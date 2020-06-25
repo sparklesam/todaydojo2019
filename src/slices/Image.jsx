@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'react-emotion';
-import Img from 'gatsby-image';
+import React from "react";
+import PropTypes from "prop-types";
+import styled from "react-emotion";
+import Img from "gatsby-image";
 
 const Content = styled.div`
   padding-top: 1.5rem;
@@ -10,7 +10,7 @@ const Content = styled.div`
 
 const Image = ({ input }) => (
   <Content>
-    <Img fluid={input.primary.image.localFile.childImageSharp.fluid} />
+    <Img fluid={input.primary.image.fluid} />
   </Content>
 );
 

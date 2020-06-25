@@ -89,7 +89,7 @@ module.exports = {
         background_color: backgroundColor,
         theme_color: themeColor,
         display: "standalone",
-        icon: favicon,
+        // icon: "src/favicon.png",
       },
     },
     // Must be placed at the end
@@ -150,18 +150,6 @@ module.exports = {
                     data {
                       feature {
                         url
-                        localFile {
-                          childImageSharp {
-                            fluid(maxWidth: 1280) {
-                              aspectRatio
-                              src
-                              srcSet
-                              srcWebp
-                              srcSetWebp
-                              sizes
-                            }
-                          }
-                        }
                        }
                       title {
                         text

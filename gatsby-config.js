@@ -1,5 +1,5 @@
 require("dotenv").config({
-  path: `.env.${process.env.NODE_ENV}`
+  path: `.env.${process.env.NODE_ENV}`,
 });
 
 const { RichText } = require("prismic-reactjs");
@@ -30,7 +30,7 @@ const codeBlock = [
   "json",
   "diff",
   "markdown",
-  "graphql"
+  "graphql",
 ];
 
 const {
@@ -47,7 +47,7 @@ const {
   logo,
   favicon,
   siteLanguage,
-  twitter
+  twitter,
 } = require("./config/website");
 
 module.exports = {
@@ -66,17 +66,10 @@ module.exports = {
     description,
     keyword,
     banner: logo,
-    twitter
+    twitter,
   },
   /* Plugins */
   plugins: [
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: "src",
-        path: `${__dirname}/src/`
-      }
-    },
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-emotion",
     {
@@ -85,16 +78,14 @@ module.exports = {
         repositoryName: "dojo2",
         accessToken:
           "MC5XOHluMmhJQUFDa0FuWGJG.77-977-9en9zZTrvv73vv73vv73vv73vv71y77-977-9Ue-_vT3vv73vv73vv73vv71I77-9BO-_ve-_vXESMO-_vXw",
-        linkResolver: () => post => `/${post.uid}`,
+        linkResolver: () => (post) => `/${post.uid}`,
         htmlSerializer: () => (type, element, content) => {
           switch (type) {
             // First differentiate between a label and a preformatted field (e.g. the Code Block slice)
             case Elements.label: {
               // Use the inline code for labels that are in the array of "codeInline"
               if (codeInline.includes(element.data.label)) {
-                return `<code class="language-${
-                  element.data.label
-                }">${content}</code>`;
+                return `<code class="language-${element.data.label}">${content}</code>`;
               }
               // Use the blockquote for labels with the name "quote"
               if (element.data.label === "quote") {
@@ -129,8 +120,8 @@ module.exports = {
               return null;
             }
           }
-        }
-      }
+        },
+      },
     },
     "gatsby-plugin-lodash",
     // Although this starter doesn't use local files this plugin is necessary for the gatsby-image features of gatsby-source-prismic
@@ -139,10 +130,19 @@ module.exports = {
     {
       resolve: "gatsby-plugin-typography",
       options: {
-        pathToConfigModule: "config/typography.js"
-      }
+        name: "src",
+        path: `${__dirname}/src/`,
+      },
     },
-    "gatsby-plugin-advanced-sitemap",
+    "gatsby-transformer-sharp",
+    "gatsby-plugin-sharp",
+    {
+      resolve: "gatsby-plugin-typography",
+      options: {
+        pathToConfigModule: "config/typography.js",
+      },
+    },
+    "gatsby-plugin-sitemap",
     {
       resolve: "gatsby-plugin-manifest",
       options: {
@@ -153,8 +153,8 @@ module.exports = {
         background_color: backgroundColor,
         theme_color: themeColor,
         display: "standalone",
-        icon: favicon
-      }
+        icon: favicon,
+      },
     },
     // Must be placed at the end
     "gatsby-plugin-offline",
@@ -170,8 +170,8 @@ module.exports = {
         // Setting this parameter is also optional
         respectDNT: true,
         // Avoids sending pageview hits from custom paths
-        exclude: ["/preview/**", "/do-not-track/me/too/"]
-      }
+        exclude: ["/preview/**", "/do-not-track/me/too/"],
+      },
     },
     {
       resolve: "gatsby-plugin-feed",
@@ -197,12 +197,12 @@ module.exports = {
           {
             serialize(ctx) {
               const { rssMetadata } = ctx.query.site.siteMetadata;
-              return ctx.query.allPrismicPost.edges.map(edge => ({
+              return ctx.query.allPrismicPost.edges.map((edge) => ({
                 date: edge.node.data.date,
                 title: edge.node.data.title.text,
                 author: "Samuel Wong",
                 url: "https://pins.desktopofsamuel.com/" + edge.node.uid,
-                guid: "https://pins.desktopofsamuel.com/" + edge.node.uid
+                guid: "https://pins.desktopofsamuel.com/" + edge.node.uid,
               }));
             },
             query: `
@@ -216,7 +216,7 @@ module.exports = {
                         url
                         localFile {
                           childImageSharp {
-                            sizes(maxWidth: 1280) {
+                            fluid(maxWidth: 1280) {
                               aspectRatio
                               src
                               srcSet
@@ -263,10 +263,10 @@ module.exports = {
             }
           `,
             output: "/rss.xml",
-            title: "Your Site's RSS Feed"
-          }
-        ]
-      }
-    }
-  ]
+            title: "Your Site's RSS Feed",
+          },
+        ],
+      },
+    },
+  ],
 };

@@ -1,0 +1,34 @@
+{
+  "Main": {
+    "name": {
+      "type": "Text",
+      "config": {
+        "label": "name",
+        "placeholder": "Name of the category"
+      }
+    },
+    "image": {
+      "type": "Image",
+      "config": {
+        "constraint": {
+          "width": 1200
+        },
+        "thumbnails": [],
+        "label": "image"
+      }
+    },
+    "keywords": {
+      "type": "Text",
+      "config": {
+        "label": "Keywords",
+        "placeholder": "No Space"
+      }
+    },
+    "description": {
+      "type": "Text",
+      "config": {
+        "label": "Description"
+      }
+    }
+  }
+}

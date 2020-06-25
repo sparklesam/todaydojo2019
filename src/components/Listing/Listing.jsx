@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'react-emotion';
-import { ListItem } from 'components/Listing';
-import { theme, reset } from 'styles';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import styled from "react-emotion";
+import { ListItem } from "components/Listing";
+import { theme, reset } from "styles";
 
 const List = styled.ul`
   margin-top: 4rem;
@@ -14,8 +14,8 @@ const List = styled.ul`
   grid-gap: 20px;
 
   @media (max-width: ${theme.breakpoints.m}) {
-  grid-template-columns: 1fr;
-  grid-gap: 0px;
+    grid-template-columns: 1fr;
+    grid-gap: 0px;
   }
 `;
 
@@ -24,12 +24,20 @@ export default class Listing extends Component {
     const { posts } = this.props;
     return (
       <List>
-        {posts.map(post => {
+        {posts.map((post) => {
           let categories = false;
-          if (post.node.data.categories[0].category) {
-            categories = post.node.data.categories.map(c => c.category.document[0].data.name);
+          if (post.node.data.categories.category) {
+            categories = post.node.data.categories.map(
+              (c) => c.category.document.data.name
+            );
           }
-          return <ListItem key={post.node.uid} node={post.node} categories={categories} />;
+          return (
+            <ListItem
+              key={post.node.uid}
+              node={post.node}
+              categories={categories}
+            />
+          );
         })}
       </List>
     );

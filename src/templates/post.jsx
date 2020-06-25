@@ -104,7 +104,7 @@ const Post = ({ data: { prismicPost, posts }, location }) => {
   const { data } = prismicPost;
   let categories = false;
   if (data.categories[0].category) {
-    categories = data.categories.map((c) => c.category.document[0].data.name);
+    categories = data.categories.map((c) => c.category.document.data.name);
   }
   return (
     <Layout>
@@ -112,7 +112,7 @@ const Post = ({ data: { prismicPost, posts }, location }) => {
         title={`${data.title.text} | ${website._title}`}
         pathname={location.pathname}
         article
-        banner={`${data.feature.localFile.publicURL}`}
+        banner={`${data.feature.url}`}
       />
       <Hero>
         <Wrapper style={{ zIndex: "2", position: "relative" }}>
@@ -142,9 +142,9 @@ const Post = ({ data: { prismicPost, posts }, location }) => {
 
           <ImageWrapper>
             {!!data.feature && !!data ? (
-              <Img fluid={data.feature.localFile.childImageSharp.fluid} />
+              <Img fluid={data.feature.fluid} />
             ) : (
-              <Img src={data.feature.localFile.publicURL} />
+              <Img src={data.feature.url} />
             )}
           </ImageWrapper>
         </Grid>
@@ -180,22 +180,18 @@ export const pageQuery = graphql`
         }
         feature {
           url
-          localFile {
-            id
-            publicURL
-            childImageSharp {
-              fluid(maxWidth: 1280) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
+          fluid {
+            ...GatsbyPrismicImageFluid
           }
         }
         date(formatString: "DD.MM.YYYY")
         categories {
           category {
             document {
-              data {
-                name
+              ... on PrismicCategory {
+                data {
+                  name
+                }
               }
             }
           }
@@ -210,26 +206,14 @@ export const pageQuery = graphql`
               }
             }
           }
-          ... on PrismicPostBodyCodeBlock {
-            slice_type
-            id
-            primary {
-              code_block {
-                html
-              }
-            }
-          }
           ... on PrismicPostBodyImage {
             slice_type
             id
             primary {
               image {
-                localFile {
-                  childImageSharp {
-                    fluid(maxWidth: 1200, quality: 90) {
-                      ...GatsbyImageSharpFluid_withWebp
-                    }
-                  }
+                url
+                fluid {
+                  ...GatsbyPrismicImageFluid
                 }
               }
             }
@@ -263,26 +247,19 @@ export const pageQuery = graphql`
               }
             }
             feature {
-              localFile {
-                id
-                childImageSharp {
-                  fluid(maxWidth: 1280) {
-                    src
-                    srcSet
-                    srcWebp
-                    srcSetWebp
-                    aspectRatio
-                    sizes
-                  }
-                }
+              url
+              fluid {
+                ...GatsbyPrismicImageFluid
               }
             }
             date(formatString: "DD.MM.YYYY")
             categories {
               category {
                 document {
-                  data {
-                    name
+                  ... on PrismicCategory {
+                    data {
+                      name
+                    }
                   }
                 }
               }

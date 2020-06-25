@@ -197,7 +197,7 @@ const Icon = styled.img`
 class Index extends Component {
   render() {
     const {
-      data: { homepage, social, posts, category },
+      data: { homepage, posts, category },
     } = this.props;
     return (
       <Layout>
@@ -260,20 +260,6 @@ export const pageQuery = graphql`
         }
       }
     }
-    social: allPrismicHeroLinksBodyLinkItem {
-      edges {
-        node {
-          primary {
-            label {
-              text
-            }
-            link {
-              url
-            }
-          }
-        }
-      }
-    }
     category: allPrismicCategory(sort: { fields: [data___name], order: ASC }) {
       edges {
         node {
@@ -291,13 +277,8 @@ export const pageQuery = graphql`
           data {
             feature {
               url
-              localFile {
-                publicURL
-                childImageSharp {
-                  fluid(maxWidth: 1280) {
-                    ...GatsbyImageSharpFluid_withWebp
-                  }
-                }
+              fluid {
+                ...GatsbyPrismicImageFluid
               }
             }
             title {
@@ -321,35 +302,29 @@ export const pageQuery = graphql`
             categories {
               category {
                 document {
-                  data {
-                    name
+                  ... on PrismicCategory {
+                    id
+                    data {
+                      name
+                    }
                   }
                 }
               }
             }
             types {
               document {
-                data {
-                  name
-                  icon {
-                    url
+                ... on PrismicType {
+                  id
+                  data {
+                    name
+                    icon {
+                      fluid {
+                        ...GatsbyPrismicImageFluid
+                      }
+                    }
                   }
                 }
               }
-            }
-          }
-        }
-      }
-    }
-    projects: allPrismicProjectsBodyLinkItem {
-      edges {
-        node {
-          primary {
-            label {
-              text
-            }
-            link {
-              url
             }
           }
         }

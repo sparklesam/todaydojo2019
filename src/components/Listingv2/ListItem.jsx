@@ -10,8 +10,7 @@ const Item = styled.li`
   margin-bottom: 1.45rem;
   background: #fbfbfb;
   transition: box-shadow 0.2s ease-in-out;
-  <<<<<<<HEAD
-  display: grid;
+  <<<<<<<headdisplay: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 16px;
   padding: 1rem;
@@ -113,7 +112,7 @@ export default class ListItem extends Component {
     return (
       <Item>
         {!!node.data && !!node.data.feature ? (
-          <Img fluid={node.data.feature.localFile.childImageSharp.fluid} />
+          <Img fluid={node.data.feature.fluid} />
         ) : (
           <Img src={node.data.feature.localfile.publicURL} />
         )}
@@ -125,12 +124,12 @@ export default class ListItem extends Component {
           {node.data.types && (
             <TypePill
               style={{
-                background: `${node.data.types.document[0].data.bgcolor}`,
-                color: `${node.data.types.document[0].data.textcolor}`,
+                background: `${node.data.types.document.data.bgcolor}`,
+                color: `${node.data.types.document.data.textcolor}`,
               }}
             >
-              <TypeIcon src={node.data.types.document[0].data.icon.url} />{" "}
-              {node.data.types.document[0].data.name}
+              <TypeIcon src={node.data.types.documen.data.icon.url} />{" "}
+              {node.data.types.document.data.name}
             </TypePill>
           )}
         </Content>

@@ -10,7 +10,7 @@ const Wrap = styled(Wrapper)`
   max-width: 800px;
   margin: 0 auto;
 
-  @media (max-width: ${props => props.theme.breakpoints.s}) {
+  @media (max-width: ${(props) => props.theme.breakpoints.s}) {
     max-width: 100%;
   }
 `;
@@ -22,8 +22,7 @@ const Hero = styled.section`
   position: relative;
   padding-bottom: 4rem;
   h1 {
-    color: ${props => props.theme.colors.grey};
-    font-weight: 600;
+    color: ${(props) => props.theme.colors.grey};
   }
 `;
 
@@ -42,7 +41,7 @@ const Background = styled.img`
 `;
 
 const Subtitle = styled.p`
-  color: ${props => props.theme.colors.greyBlue};
+  color: ${(props) => props.theme.colors.greyBlue};
   font-size: 1.25rem;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -59,7 +58,7 @@ const Headline = styled.h1`
 `;
 
 const Description = styled.p`
-  color: ${props => props.theme.colors.grey};
+  color: ${(props) => props.theme.colors.grey};
   font-size: 1rem;
 `;
 
@@ -68,17 +67,15 @@ const Category = ({
   data: {
     page: { data },
     posts: { edges, totalCount },
-    categories
+    categories,
   },
-  location
+  location,
 }) => (
   <Layout>
     <SEO
-      title={` Best ${category} Design Resources 2019 | Curated Design Pins on ${
-        website._title
-      }`}
+      title={` Best ${category} Design Resources 2019 | Curated Design Pins on ${website._title}`}
       pathname={location.pathname}
-      banner={`${data.image.localFile.publicURL}`}
+      banner={`${data.image.fluid}`}
       desc={`${data.description}`}
       keyword={`${data.keywords}`}
     />
@@ -107,15 +104,15 @@ export default Category;
 
 Category.propTypes = {
   pageContext: PropTypes.shape({
-    category: PropTypes.string.isRequired
+    category: PropTypes.string.isRequired,
   }).isRequired,
   data: PropTypes.shape({
     posts: PropTypes.shape({
       edges: PropTypes.array.isRequired,
-      totalCount: PropTypes.number.isRequired
-    }).isRequired
+      totalCount: PropTypes.number.isRequired,
+    }).isRequired,
   }).isRequired,
-  location: PropTypes.object.isRequired
+  location: PropTypes.object.isRequired,
 };
 
 export const pageQuery = graphql`
@@ -126,14 +123,8 @@ export const pageQuery = graphql`
         description
         keywords
         image {
-          localFile {
-            id
-            publicURL
-            childImageSharp {
-              fluid(maxWidth: 1280) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
+          fluid {
+            ...GatsbyPrismicImageFluid
           }
         }
       }
@@ -142,13 +133,7 @@ export const pageQuery = graphql`
       sort: { fields: [data___date], order: DESC }
       filter: {
         data: {
-          categories: {
-            elemMatch: {
-              category: {
-                document: { elemMatch: { data: { name: { eq: $category } } } }
-              }
-            }
-          }
+          categories: { elemMatch: { category: { uid: { eq: $category } } } }
         }
       }
     ) {
@@ -190,20 +175,24 @@ export const pageQuery = graphql`
             categories {
               category {
                 document {
-                  data {
-                    name
+                  ... on PrismicCategory {
+                    data {
+                      name
+                    }
                   }
                 }
               }
             }
             types {
               document {
-                data {
-                  bgcolor
-                  textcolor
-                  name
-                  icon {
-                    url
+                ... on PrismicType {
+                  data {
+                    bgcolor
+                    textcolor
+                    name
+                    icon {
+                      url
+                    }
                   }
                 }
               }

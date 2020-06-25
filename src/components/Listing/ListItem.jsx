@@ -23,7 +23,7 @@ const Content = styled.div`
 const Headline = styled.p`
   /*font-family: 'Source Sans Pro', -apple-system, 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial',
     sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';*/
-  /* color: ${props => props.theme.colors.grey};*/
+  /* color: ${(props) => props.theme.colors.grey};*/
   color: #979DAD;
   margin-bottom: 5px;
   font-weight: 500;
@@ -34,7 +34,7 @@ const Headline = styled.p`
   color: #BABABA;
   a {
     color: #BABABA;
-    /*color: ${props => props.theme.colors.grey};*/
+    /*color: ${(props) => props.theme.colors.grey};*/
     font-style: normal;
     font-weight: 500;
   }
@@ -50,9 +50,9 @@ const StyledLink = /*(Link)*/ styled.div`
   color: #2F3D61;
   font-weight: 700;
   cursor: auto; 
-  /*color: ${props => props.theme.colors.black};*/
+  /*color: ${(props) => props.theme.colors.black};*/
   font-style: normal;
-  @media (max-width: ${props => props.theme.breakpoints.s}) {
+  @media (max-width: ${(props) => props.theme.breakpoints.s}) {
     font-size: 1.777rem;
   }
 `;
@@ -83,7 +83,7 @@ export default class ListItem extends Component {
 
     return (
       <Item>
-        <Img fluid={node.data.feature.localFile.childImageSharp.fluid} />
+        <Img fluid={node.data.feature.fluid} />
         <Content>
           <Headline>
             {categories && <Categories categories={categories} />}
@@ -101,5 +101,5 @@ export default class ListItem extends Component {
 
 ListItem.propTypes = {
   node: PropTypes.object.isRequired,
-  categories: PropTypes.array.isRequired
+  categories: PropTypes.array.isRequired,
 };

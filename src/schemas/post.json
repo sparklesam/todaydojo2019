@@ -51,7 +51,7 @@
             "icon": "code",
             "display": "list",
             "non-repeat": {
-              "code-block": {
+              "codeblock": {
                 "type": "StructuredText",
                 "config": {
                   "multi": "preformatted",

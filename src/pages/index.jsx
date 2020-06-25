@@ -31,7 +31,7 @@ const Hero = styled.header`
   overflow: hidden;
   margin-top: 150px;
   h1 {
-    color: ${props => props.theme.colors.titlegrey};
+    color: ${(props) => props.theme.colors.titlegrey};
     margin-bottom: 2rem;
     font-weight: 500;
   }
@@ -46,19 +46,19 @@ const HeroWrapper = styled.div`
 const HeroInner = styled.div`
   text-align: left;
   h1 {
-    color: ${props => props.theme.colors.grey};
+    color: ${(props) => props.theme.colors.grey};
     margin-bottom: 2rem;
     font-weight: 500;
   }
-  @media (max-width: ${props => props.theme.breakpoints.l}) {
+  @media (max-width: ${(props) => props.theme.breakpoints.l}) {
     padding-top: 6rem;
     padding-bottom: 6rem;
   }
-  @media (max-width: ${props => props.theme.breakpoints.m}) {
+  @media (max-width: ${(props) => props.theme.breakpoints.m}) {
     padding-top: 6rem;
     padding-bottom: 6rem;
   }
-  @media (max-width: ${props => props.theme.breakpoints.s}) {
+  @media (max-width: ${(props) => props.theme.breakpoints.s}) {
     padding-top: 2rem;
     padding-bottom: 7rem;
   }
@@ -69,10 +69,10 @@ const HeroText = styled.div`
   font-size: 1.7rem;
   line-height: 1.4;
   margin-bottom: 2rem;
-  @media (max-width: ${props => props.theme.breakpoints.m}) {
+  @media (max-width: ${(props) => props.theme.breakpoints.m}) {
     font-size: 1.4rem;
   }
-  @media (max-width: ${props => props.theme.breakpoints.s}) {
+  @media (max-width: ${(props) => props.theme.breakpoints.s}) {
     font-size: 1.25rem;
   }
 `;
@@ -130,21 +130,21 @@ const Social = styled.ul`
     display: inline;
     &:not(:first-child) {
       margin-left: 2.5rem;
-      @media (max-width: ${props => props.theme.breakpoints.s}) {
+      @media (max-width: ${(props) => props.theme.breakpoints.s}) {
         margin-left: 1.75rem;
       }
     }
     a {
       font-style: normal;
-      color: ${props => props.theme.colors.greyDark};
+      color: ${(props) => props.theme.colors.greyDark};
       font-size: 1.333rem;
       font-weight: 600;
       &:hover,
       &:focus {
-        color: ${props => props.theme.colors.primary};
+        color: ${(props) => props.theme.colors.primary};
         text-decoration: none;
       }
-      @media (max-width: ${props => props.theme.breakpoints.s}) {
+      @media (max-width: ${(props) => props.theme.breakpoints.s}) {
         font-size: 1.2rem;
       }
     }
@@ -197,7 +197,7 @@ const Icon = styled.img`
 class Index extends Component {
   render() {
     const {
-      data: { homepage, social, posts, category }
+      data: { homepage, social, posts, category },
     } = this.props;
     return (
       <Layout>
@@ -220,7 +220,7 @@ class Index extends Component {
             >
               <Title style={{ marginTop: "4rem" }}>Categories</Title>
               <Category>
-                {category.edges.map(c => (
+                {category.edges.map((c) => (
                   <CateogryItem>
                     <Link to={`/categories/${kebabCase(c.node.data.name)}`}>
                       {c.node.data.name}
@@ -244,8 +244,8 @@ export default Index;
 
 Index.propTypes = {
   data: PropTypes.shape({
-    posts: PropTypes.object.isRequired
-  }).isRequired
+    posts: PropTypes.object.isRequired,
+  }).isRequired,
 };
 
 export const pageQuery = graphql`

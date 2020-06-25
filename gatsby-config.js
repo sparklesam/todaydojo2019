@@ -176,9 +176,11 @@ module.exports = {
                       categories {
                         category {
                           document {
+                            ... on PrismicCategory {
                             data {
                               name
                             }
+                          }
                           }
                         }
                       }

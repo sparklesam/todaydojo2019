@@ -147,14 +147,8 @@ export const pageQuery = graphql`
             }
             feature {
               url
-              localFile {
-                id
-                publicURL
-                childImageSharp {
-                  fluid(maxWidth: 1280) {
-                    ...GatsbyImageSharpFluid_withWebp
-                  }
-                }
+              fluid {
+                ...GatsbyPrismicImageFluid
               }
             }
             url {

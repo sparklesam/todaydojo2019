@@ -1,5 +1,12 @@
 {
   "Main": {
+    "uid": {
+      "type": "UID",
+      "config": {
+        "label": "UID",
+        "placeholder": "slug"
+      }
+    },
     "name": {
       "type": "Text",
       "config": {

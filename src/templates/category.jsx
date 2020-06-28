@@ -73,7 +73,7 @@ const Category = ({
 }) => (
   <Layout>
     <SEO
-      title={` Best ${category} Design Resources 2019 | Curated Design Pins on ${website._title}`}
+      title={` Best ${category} Design Resources 2020 | Curated Design Pins on ${website._title}`}
       pathname={location.pathname}
       banner={`${data.image.fluid}`}
       desc={`${data.description}`}
@@ -84,7 +84,7 @@ const Category = ({
       <Wrap style={{ zIndex: "2", position: "relative" }}>
         <Pagetitle>
           <Subtitle>Category</Subtitle>
-          <Headline>{category}</Headline>
+          <Headline>{data.name}</Headline>
           <Description>{data.description}</Description>
         </Pagetitle>
       </Wrap>
@@ -93,7 +93,7 @@ const Category = ({
     <Wrap>
       <Title style={{ marginTop: "4rem" }}>
         {totalCount} {totalCount === 1 ? "Post" : "Posts"}{" "}
-        {totalCount === 1 ? "was" : "were"} tagged with "{category}"
+        {totalCount === 1 ? "was" : "were"} tagged with "{data.name}"
       </Title>
       <Listingv2 posts={edges} />
     </Wrap>
@@ -117,7 +117,7 @@ Category.propTypes = {
 
 export const pageQuery = graphql`
   query CategoryPage($category: String!) {
-    page: prismicCategory(data: { name: { eq: $category } }) {
+    page: prismicCategory(uid: { eq: $category }) {
       data {
         name
         description

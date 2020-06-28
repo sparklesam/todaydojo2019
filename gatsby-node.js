@@ -11,19 +11,14 @@ exports.createPages = async ({ graphql, actions }) => {
           node {
             id
             uid
-            data {
-              categories {
-                category {
-                  document {
-                    ... on PrismicCategory {
-                      data {
-                        name
-                      }
-                    }
-                  }
-                }
-              }
-            }
+          }
+        }
+      }
+      allPrismicCategory {
+        edges {
+          node {
+            id
+            uid
           }
         }
       }
@@ -33,15 +28,16 @@ exports.createPages = async ({ graphql, actions }) => {
   const postTemplate = path.resolve("src/templates/post.jsx");
   const categoryTemplate = path.resolve("src/templates/category.jsx");
   const postsList = pages.data.allPrismicPost.edges;
+  const category2List = pages.data.allPrismicCategory.edges;
   const categorySet = new Set();
 
   // Double check that the post has a category assigned
   postsList.forEach((edge) => {
-    if (edge.node.data.categories[0].category) {
-      edge.node.data.categories.forEach((cat) => {
-        categorySet.add(cat.category.document.data.name);
-      });
-    }
+    // if (edge.node.data.categories[0].category) {
+    //   edge.node.data.categories.forEach((cat) => {
+    //     categorySet.add(cat.category.document.uid);
+    //   });
+    // }
 
     // The uid you assigned in Prismic is the slug!
     createPage({
@@ -54,14 +50,24 @@ exports.createPages = async ({ graphql, actions }) => {
     });
   });
 
-  const categoryList = Array.from(categorySet);
+  // const categoryList = Array.from(categorySet);
 
-  categoryList.forEach((category) => {
+  // categoryList.forEach((category,) => {
+  //   createPage({
+  //     path: `/categories/${_.kebabCase(category)}`,
+  //     component: categoryTemplate,
+  //     context: {
+  //       category,
+  //     },
+  //   });
+  // });
+
+  category2List.forEach((edge) => {
     createPage({
-      path: `/categories/${_.kebabCase(category)}`,
+      path: `/categories/${edge.node.uid}`,
       component: categoryTemplate,
       context: {
-        category,
+        category: edge.node.uid,
       },
     });
   });

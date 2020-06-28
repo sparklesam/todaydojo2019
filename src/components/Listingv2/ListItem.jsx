@@ -121,19 +121,20 @@ export default class ListItem extends Component {
             {node.data.title.text}
           </StyledLink>
           <SliceZone allSlices={node.data.body} />
-          {node.data.types && (
+          {!!node.data.types && !!node.data.types.document ? (
             <TypePill
               style={{
                 background: `${node.data.types.document.data.bgcolor}`,
                 color: `${node.data.types.document.data.textcolor}`,
               }}
             >
-              <TypeIcon src={node.data.types.documen.data.icon.url} />{" "}
+              <TypeIcon src={node.data.types.document.data.icon.url} />{" "}
               {node.data.types.document.data.name}
             </TypePill>
+          ) : (
+            <></>
           )}
         </Content>
-        <Img sizes={node.data.feature.localFile.childImageSharp.sizes} />
       </Item>
     );
   }

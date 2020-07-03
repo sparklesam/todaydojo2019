@@ -222,7 +222,7 @@ class Index extends Component {
               <Category>
                 {category.edges.map((c) => (
                   <CateogryItem>
-                    <Link to={`/categories/${kebabCase(c.node.data.name)}`}>
+                    <Link to={`/categories/${kebabCase(c.node.uid)}`}>
                       {c.node.data.name}
                     </Link>
                   </CateogryItem>
@@ -264,6 +264,7 @@ export const pageQuery = graphql`
       edges {
         node {
           id
+          uid
           data {
             name
           }
@@ -303,6 +304,7 @@ export const pageQuery = graphql`
               category {
                 document {
                   ... on PrismicCategory {
+                    uid
                     id
                     data {
                       name

@@ -27,9 +27,7 @@ export default class Listing extends Component {
         {posts.map((post) => {
           let categories = false;
           if (post.node.data.categories.category) {
-            categories = post.node.data.categories.map(
-              (c) => c.category.document.data.name
-            );
+            categories = post.node.data.categories.category.document.uid;
           }
           return (
             <ListItem

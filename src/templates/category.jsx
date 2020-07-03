@@ -67,7 +67,6 @@ const Category = ({
   data: {
     page: { data },
     posts: { edges, totalCount },
-    categories,
   },
   location,
 }) => (

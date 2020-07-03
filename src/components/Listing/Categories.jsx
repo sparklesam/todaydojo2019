@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'gatsby';
-import kebabCase from 'lodash/kebabCase';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { Link } from "gatsby";
+import kebabCase from "lodash/kebabCase";
 
 export default class Categories extends Component {
   render() {
@@ -10,7 +10,7 @@ export default class Categories extends Component {
       <>
         {categories.map((cat, i) => (
           <React.Fragment key={cat}>
-            {!!i && ', '}
+            {!!i && ", "}
             <Link to={`/categories/${kebabCase(cat)}`}>{cat}</Link>
           </React.Fragment>
         ))}

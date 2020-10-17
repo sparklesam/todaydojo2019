@@ -47,8 +47,7 @@ module.exports = {
       resolve: "gatsby-source-prismic",
       options: {
         repositoryName: "dojo2",
-        accessToken:
-          "MC5XOHluMmhJQUFDa0FuWGJG.77-977-9en9zZTrvv73vv73vv73vv73vv71y77-977-9Ue-_vT3vv73vv73vv73vv71I77-9BO-_ve-_vXESMO-_vXw",
+        accessToken: process.env.API_KEY,
         schemas: {
           category: require("./src/schemas/category.json"),
           hero_links: require("./src/schemas/category.json"),

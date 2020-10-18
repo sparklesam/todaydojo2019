@@ -141,6 +141,9 @@ module.exports = {
                 author: "Samuel Wong",
                 url: `https://pins.desktopofsamuel.com/${edge.node.uid}`,
                 guid: `https://pins.desktopofsamuel.com/${edge.node.uid}`,
+                custom_elements: [
+                  { "content:encoded": `${edge.node.data.body.}` },
+                ],
               }));
             },
             query: `
@@ -191,7 +194,7 @@ module.exports = {
             }
           `,
             output: "/rss.xml",
-            title: "Your Site's RSS Feed",
+            title: "Pins of Samuel",
           },
         ],
       },

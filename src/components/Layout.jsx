@@ -1,15 +1,15 @@
 /* eslint no-unused-expressions: 0 */
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { StaticQuery, graphql } from 'gatsby';
-import { injectGlobal } from 'emotion';
-import { ThemeProvider } from 'emotion-theming';
-import 'typeface-lora';
-import 'typeface-source-sans-pro';
-import { Navigation, Footer, SEO } from 'components';
-import { theme, reset } from 'styles';
-
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { StaticQuery, graphql } from "gatsby";
+import { injectGlobal } from "emotion";
+import { ThemeProvider } from "emotion-theming";
+import "typeface-lora";
+import "typeface-source-sans-pro";
+import { Navigation, Footer, SEO } from "components";
+import { theme, reset } from "styles";
+import { GlobalStyle } from "../styles/GlobalStyle";
 
 injectGlobal`
   ${reset}
@@ -72,10 +72,15 @@ injectGlobal`
 const PureLayout = ({ children, data }) => (
   <ThemeProvider theme={theme}>
     <>
+      <GlobalStyle />
       <SEO />
       {children}
       <Footer>
-        <div dangerouslySetInnerHTML={{ __html: data.prismicHomepage.data.footer.html }} />
+        <div
+          dangerouslySetInnerHTML={{
+            __html: data.prismicHomepage.data.footer.html,
+          }}
+        />
       </Footer>
     </>
   </ThemeProvider>
@@ -96,7 +101,7 @@ class Layout extends Component {
             }
           }
         `}
-        render={data => <PureLayout {...this.props} data={data} />}
+        render={(data) => <PureLayout {...this.props} data={data} />}
       />
     );
   }

@@ -8,6 +8,8 @@ import Categories from "../components/Listing/Categories";
 import kebabCase from "lodash/kebabCase";
 import Link from "gatsby-link";
 import Backgroundshape from "../../static/bg.svg";
+import { H1, H3 } from "../styles/TextStyles";
+import { themes } from "../styles/ColorStyles";
 
 const Topbar = styled.div`
   background: #2f3d61;
@@ -24,17 +26,26 @@ const Topbar = styled.div`
   }
 `;
 
+const PageTitle = styled(H1)`
+  color: ${themes.light.titlegrey};
+`;
+
+const PageSubtitle = styled(H3)`
+  color: ${themes.light.grey};
+  font-weight: 400;
+`;
+
 const Hero = styled.header`
   background: /*linear-gradient(90deg, #0E38A6 0%, #0181DE 100%)*/ white;
   width: 100%;
   position: relative;
   overflow: hidden;
   margin-top: 150px;
-  h1 {
+  /* h1 {
     color: ${(props) => props.theme.colors.titlegrey};
     margin-bottom: 2rem;
     font-weight: 500;
-  }
+  } */
 `;
 
 const HeroWrapper = styled.div`
@@ -64,18 +75,18 @@ const HeroInner = styled.div`
   }
 `;
 
-const HeroText = styled.div`
-  color: #878787;
-  font-size: 1.7rem;
-  line-height: 1.4;
-  margin-bottom: 2rem;
-  @media (max-width: ${(props) => props.theme.breakpoints.m}) {
-    font-size: 1.4rem;
-  }
-  @media (max-width: ${(props) => props.theme.breakpoints.s}) {
-    font-size: 1.25rem;
-  }
-`;
+// const HeroText = styled.div`
+//   color: #878787;
+//   font-size: 1.7rem;
+//   line-height: 1.4;
+//   margin-bottom: 2rem;
+//   @media (max-width: ${(props) => props.theme.breakpoints.m}) {
+//     font-size: 1.4rem;
+//   }
+//   @media (max-width: ${(props) => props.theme.breakpoints.s}) {
+//     font-size: 1.25rem;
+//   }
+// `;
 
 const Background = styled.img`
   /*  position: absolute;
@@ -207,8 +218,9 @@ class Index extends Component {
         <Hero>
           {/*<Background src={Backgroundshape} />*/}
           <Wrapper>
-            <h1>{homepage.data.title.text}</h1>
-            <HeroText
+            <PageTitle>{homepage.data.title.text}</PageTitle>
+            <PageSubtitle
+              as="h2"
               dangerouslySetInnerHTML={{ __html: homepage.data.content.html }}
             />
           </Wrapper>

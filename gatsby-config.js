@@ -140,9 +140,6 @@ module.exports = {
                 author: "Samuel Wong",
                 url: `https://pins.desktopofsamuel.com/${edge.node.uid}`,
                 guid: `https://pins.desktopofsamuel.com/${edge.node.uid}`,
-                custom_elements: [
-                  { "content:encoded": `${edge.node.data.body.}` },
-                ],
               }));
             },
             query: `
